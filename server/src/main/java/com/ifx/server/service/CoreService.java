@@ -471,8 +471,17 @@ public class CoreService {
             }
             
             if (tpm.import_qualification(user.getQualification()) != true) {
+<<<<<<< HEAD
                 return new Response<String>(Response.STATUS_ERROR, "bad qualification format1");
             }// we can not nullify the qualification here because in or scheme, amost anybody send a request and arrive here
+=======
+                return new Response<String>(Response.STATUS_ERROR, "invalid qualification, please perform Atelic to generate a new qualification");
+            } else {
+                // nullify the qualification to prevent replay attacks
+                user.setQualification(null);
+                userRepository.save(user);
+            }
+>>>>>>> 1fd385a907fbdb89b0bf7bc902bb96a0c4998a9f
             if (tpm.import_quote_signature(attest.getQuote(), attest.getSignature()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
             }
