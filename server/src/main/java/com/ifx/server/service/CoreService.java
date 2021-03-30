@@ -390,9 +390,11 @@ public class CoreService {
     public Response<AtelicResp> restAtelic(@RequestBody Atelic atelic) {
         try {
             User user = userRepository.findByUsername(atelic.getUsername());
-            if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
-                return new Response<AtelicResp>(Response.STATUS_ERROR, "invalid username or password", null);
+            //if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
+            if (user == null) {//Modification, we dont want the necessity of use the password to validate the RB-pi status
+                return new Response<AtelicResp>(Response.STATUS_ERROR, "invalid username", null);
             }
+            
             String qualification = TPMEngine.getQualification();
             user.setQualification(qualification);
             userRepository.save(user);
@@ -405,7 +407,8 @@ public class CoreService {
                 atelicResp.setCredential(credential);
             } else {
                 // qualification in plain
-                atelicResp.setQualification(qualification);
+                //atelicResp.setQualification(qualification);
+                return new Response<AtelicResp>(Response.STATUS_ERROR, "Please, ask to the manager of this account to set the EkPub and the AkName of the device to be attested", null); //modification, we dont want to sent a qualification plain text
             }
 
             /**
@@ -430,8 +433,9 @@ public class CoreService {
     public Response<String> restAttest(@RequestBody Attest attest) {
         try {
             User user = userRepository.findByUsername(attest.getUsername());
-            if (user == null || !passwordEncoder.matches(attest.getPassword(),user.getPassword())) {
-                return new Response<String>(Response.STATUS_ERROR, "invalid username or password");
+            //if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
+            if (user == null) {//Modification, we dont want the necessity of use the password to validate the RB-pi status
+                return new Response<String>(Response.STATUS_ERROR, "invalid username");
             }
             int[] sha1Bank = fromStr2IntArray(user.getSha1Bank());
             int[] sha256Bank = fromStr2IntArray(user.getSha256Bank());
@@ -465,9 +469,10 @@ public class CoreService {
             if (tpm.import_publickey_pcr(user.getAkPub(), sha1Bank, sha256Bank, pcrs) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "bad public key or pcr values format");
             }
+            
             if (tpm.import_qualification(user.getQualification()) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad qualification format");
-            }
+                return new Response<String>(Response.STATUS_ERROR, "bad qualification format1");
+            }// we can not nullify the qualification here because in or scheme, amost anybody send a request and arrive here
             if (tpm.import_quote_signature(attest.getQuote(), attest.getSignature()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
             }
@@ -490,10 +495,30 @@ public class CoreService {
                 }
             }
 
-            /**
+            /**a
+             * Check signature
+             * It is important to know if the fail was becasue the signature or the quote to delete the qualification when the signature is verifyied
+             *
+             */
+            if (tpm.verify_signature() != true) { //by ernesto
+                try {
+                    resp.setOutcome("Error in signature");
+                    simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
+                            new Response<AttestResp>(Response.STATUS_ERROR, resp));
+                } catch (Exception e) {
+                    // ignore
+                }
+                return new Response<String>(Response.STATUS_ERROR, "Error in signature");
+            }
+            
+            //If the signature was OK, it is a genuine attestation, therefore we can delete the qualification to avoid futures replay attacks
+            user.setQualification(null);//by ernesto
+            userRepository.save(user);
+
+            /**a
              * Execute attestation, check quote and signature
              *
-             * Send response to active clients via websocket
+             * Send response to active clients via websocket"00""00"
              * &
              * Respond to REST service
              */

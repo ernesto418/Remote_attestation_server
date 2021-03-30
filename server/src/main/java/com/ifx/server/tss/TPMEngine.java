@@ -156,6 +156,18 @@ public class TPMEngine {
             return false;
         }
     }
+    public boolean verify_signature() {
+    try {
+        /**
+            * Verify signature, (ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature)
+            */
+        byte[] signedBlob = quote.quoted.toTpm();
+        return  Crypto.validateSignature(trustedPK,  signedBlob,  quote.signature);
+    } catch (Exception e) {
+        return false;
+    }
+}
+
 
     /**
      * Calculate PCRs digest
