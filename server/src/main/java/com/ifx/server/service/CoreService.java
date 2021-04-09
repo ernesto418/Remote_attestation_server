@@ -471,7 +471,7 @@ public class CoreService {
             }
             
             if (tpm.import_qualification(user.getQualification()) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad qualification format1");
+                return new Response<String>(Response.STATUS_ERROR, "bad qualification formatformat1");
             }// we can not nullify the qualification here because in or scheme, amost anybody send a request and arrive here
             if (tpm.import_quote_signature(attest.getQuote(), attest.getSignature()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
