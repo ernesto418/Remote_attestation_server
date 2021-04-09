@@ -500,7 +500,7 @@ public class CoreService {
              * It is important to know if the fail was becasue the signature or the quote to delete the qualification when the signature is verifyied
              *
              */
-            if (tpm.verify_signature() != true) { //by ernesto
+            if (tpm.verify_signature() != true) {
                 try {
                     resp.setOutcome("Error in signature");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
@@ -512,7 +512,7 @@ public class CoreService {
             }
             
             //If the signature was OK, it is a genuine attestation, therefore we can delete the qualification to avoid futures replay attacks
-            user.setQualification(null);//by ernesto
+            user.setQualification(null);
             userRepository.save(user);
 
             /**a
