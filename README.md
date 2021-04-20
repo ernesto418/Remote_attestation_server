@@ -41,7 +41,7 @@ $ sudo java -jar server-0.0.1-SNAPSHOT.jar
 ## Step 3: Start the docker container
 
 ```
-  docker start server_remote_attestation
+  docker start server_remote_attestation 
 
 ```
 # License
