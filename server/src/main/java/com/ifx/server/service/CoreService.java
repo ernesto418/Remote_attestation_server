@@ -32,6 +32,7 @@ import com.ifx.server.service.security.UserRepositoryService;
 import com.ifx.server.service.security.UserValidator;
 import com.ifx.server.tss.CertificationAuthority;
 import com.ifx.server.tss.TPMEngine;
+import com.ifx.server.tss.RSAkey;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -346,11 +347,16 @@ public class CoreService {
             } catch (Exception e) {
                 // ignore
             }
-
+            //key for TPM policy creation and sharing PuK
+            RSAkey RSAk = new RSAkey();
+            //First generate a public/private key pair
+            RSAk.generateKeyPair();            
+            String Private_key =  RSAk.PrivateKeytoPEM();
+            String Public_string = RSAk.PublicKeytoPEM();
             /**
              * Respond to REST service
              */
-            return new Response<String>(Response.STATUS_OK, null);
+            return new Response<String>(Response.STATUS_OK, null,Public_string);
         } catch (Exception e) {
             return new Response<String>(Response.STATUS_ERROR, e.toString());
         }
