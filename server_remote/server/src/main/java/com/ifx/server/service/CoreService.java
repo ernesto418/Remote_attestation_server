@@ -353,6 +353,9 @@ public class CoreService {
             RSAk.generateKeyPair();            
             String Private_key =  RSAk.PrivateKeytoPEM();
             String Public_string = RSAk.PublicKeytoPEM();
+            //Store thee private and Publc keys NOT SAFE PROCESS, DO NOT USE IN REAL APPLICATIONS
+            user.setPiV_PEM(Private_key);
+            user.setPuB_PEM(Public_string);
             /**
              * Respond to REST service
              */
