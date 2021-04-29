@@ -22,11 +22,11 @@
 * SOFTWARE
 */
 
-package com.ifx.server.tss;
-
+package main;
 import com.ifx.server.model.IMATemplate;
 import org.bouncycastle.util.encoders.Hex;
 import tss.*;
+import tss.src.TpmTyjpes;
 import tss.tpm.*;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -36,6 +36,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import static tss.Crypto.hash;
+import java.security.*;
 
 public class TPMEngine {
 
@@ -157,26 +158,16 @@ public class TPMEngine {
         }
     }
     public boolean verify_signature() {
-        try {
-            /**
-                * Verify signature, (ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature)
-                */
-            byte[] signedBlob = quote.quoted.toTpm();
-            return  Crypto.validateSignature(trustedPK,  signedBlob,  quote.signature);
-        } catch (Exception e) {
-            return false;
-        }
+    try {
+        /**
+            * Verify signature, (ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature)
+            */
+        byte[] signedBlob = quote.quoted.toTpm();
+        return  Crypto.validateSignature(trustedPK,  signedBlob,  quote.signature);
+    } catch (Exception e) {
+        return false;
     }
-    public int getResetcount() {
-        try {
-            /**
-                * Return the reset count from the sent Quote
-                */
-            return  quote.quoted.clockInfo.resetCount;
-        } catch (Exception e) {
-            return -1;
-        }
-    }
+}
 
 
     /**
@@ -522,5 +513,12 @@ public class TPMEngine {
      */
     private static String byteArrayToHexString(byte[] ba) {
         return Hex.toHexString(ba);
+    }
+    public static void main(String... argv) throws Exception {
+        TPMEngine tpm = new TPMEngine();
+        String quote = "ff54434780180022000bb87742e0326dc7920ffea8d4d4ef0921546ecf9ea3e1c65358511d08d857dae2000a0556492be8f5a66fb36600000000137f89170000005a0000000001000700550011cb0000000002000403000400000b030004000020177af06ab7d8cbe0a2cc97c6e47734a756f63582d6faef752b5ba53968f284b7";
+        String sig ="0014000b0100c6a4f36869c780f7ed18cc16b67f229720db184b5fc981d3584df46e1f99967e28db15a0ecefc6a3cc179669c914e258c900cec71036f7ee75ff3299d1d8ff3512211692be51ebc865c9da2679fe9463d3bc62743c59fd0129a1724ff19d6022f6c4c4f88ef0aa120b265916a8a61b9fb00f55ed6a9661e1b6dd40e937828984a4a99487e1629977dbc14bfe27b77affdc38185aafebd3e7439f7bc64c273c72f30368ebad17f1179961b8089b829d6b5d567dcbf49aeffa645f55dd044ec4c8af56d63f2ad2965e7ba8ecb5229b1913c2ffae17da56bfc9d54784bd044da59bd9e88ddb981863fea89cc70233f81cbb60facb8a16a891e5199ab225ec6a498b";
+        tpm.import_quote_signature(quote, sig);
+        System.out.println("Signature correct: " + tpm.quote.quoted.clockInfo.resetCount);
     }
 }

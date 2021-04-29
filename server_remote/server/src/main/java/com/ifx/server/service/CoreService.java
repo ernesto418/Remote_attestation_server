@@ -334,6 +334,15 @@ public class CoreService {
              * Sorting END
              */
 
+            //key for TPM policy creation and sharing PuK
+            RSAkey RSAk = new RSAkey();
+            //First generate a public/private key pair
+            RSAk.generateKeyPair();            
+            String Private_key =  RSAk.PrivateKeytoPEM();
+            String Public_string = RSAk.PublicKeytoPEM();
+            //Store the private and Public keys NOT SAFE PROCESS, DO NOT USE IN REAL APPLICATIONS
+            user.setPiV_PEM(Private_key);
+            user.setPuB_PEM(Public_string);
             userRepository.save(user);
 
             /**
@@ -347,15 +356,7 @@ public class CoreService {
             } catch (Exception e) {
                 // ignore
             }
-            //key for TPM policy creation and sharing PuK
-            RSAkey RSAk = new RSAkey();
-            //First generate a public/private key pair
-            RSAk.generateKeyPair();            
-            String Private_key =  RSAk.PrivateKeytoPEM();
-            String Public_string = RSAk.PublicKeytoPEM();
-            //Store thee private and Publc keys NOT SAFE PROCESS, DO NOT USE IN REAL APPLICATIONS
-            user.setPiV_PEM(Private_key);
-            user.setPuB_PEM(Public_string);
+
             /**
              * Respond to REST service
              */
@@ -480,8 +481,8 @@ public class CoreService {
             }
             
             if (tpm.import_qualification(user.getQualification()) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad qualification format");
-            }// we can not nullify the qualification here because in or scheme, amost anybody send a request and arrive here
+                return new Response<String>(Response.STATUS_ERROR, "bad qualification format or qualification deleted");
+            }// we can not nullify the qualification here because in our scheme, almost anybody can send a request and arrive here
             if (tpm.import_quote_signature(attest.getQuote(), attest.getSignature()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
             }
@@ -521,6 +522,7 @@ public class CoreService {
             }
             
             //If the signature was OK, it is a genuine attestation, therefore we can delete the qualification to avoid futures replay attacks
+            //If the signature is OK, there is just one try to pass the attestation process
             user.setQualification(null);
             userRepository.save(user);
 
@@ -541,6 +543,11 @@ public class CoreService {
                 }
                 return new Response<String>(Response.STATUS_ERROR, "Error in signature, platform measurement, or qualification data");
             } else {
+                    //by ernesto , Verifica si va aqui o fuera del try lo de la firma
+                    RSAkey RSAk = new RSAkey();
+                    RSAk.import_pair(user.getPiV_PEM(),user.getPuB_PEM());
+                    int resetCount = tpm.getResetcount();
+                    String authorization_signature = RSAk.sign_resetsession(resetCount);
                 try {
                     resp.setOutcome("Passed");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
@@ -548,7 +555,7 @@ public class CoreService {
                 } catch (Exception e) {
                     // ignore
                 }
-                return new Response<String>(Response.STATUS_OK, "passed");
+                return new Response<String>(Response.STATUS_OK, "passed",authorization_signature);
             }
         } catch (Exception e) {
             return new Response<String>(Response.STATUS_ERROR, e.toString());

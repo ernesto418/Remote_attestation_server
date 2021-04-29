@@ -44,8 +44,10 @@ public class User {
 
     private String username;
     private String password;
-    private String PiV_PEM;
-    private String PuB_PEM;
+    @Column(length = 1800)
+    private String piV_PEM;
+    @Column(length = 500)
+    private String puB_PEM;
 
     private String qualification;
     @Column(length = 5000)
