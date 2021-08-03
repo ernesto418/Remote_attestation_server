@@ -1,0 +1,1 @@
+window.onload=function(){console.log("website loaded");fCheckBrowser()};function fSignOut(){fWebApi("GET","signout",null,function(a){a.status===RESP_OK&&location.reload()})};
