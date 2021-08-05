@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.ifx.server.ServerApplicationTests
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 26.302 s - in com.ifx.server.ServerApplicationTests
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 15.194 s - in com.ifx.server.ServerApplicationTests

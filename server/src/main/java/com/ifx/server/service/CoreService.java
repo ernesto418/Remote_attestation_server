@@ -214,7 +214,7 @@ public class CoreService {
             user.setAkName(TPMEngine.computePubKeyName(attune.getAkPub()));
             user.setEkCrt(attune.getEkCrt());
             user.setEkCrtAttest("Failed");
-
+            System.out.print("start the process\n");
             if (attune.getImaTemplate() != null) {
                 List<IMATemplate> IMATemplates = TPMEngine.parseLinuxMeasurements(attune.getImaTemplate(), PLATFORM_PCR);
                 String measurementList = TPMEngine.printIMATemplate(IMATemplates);
@@ -224,7 +224,7 @@ public class CoreService {
                 user.setMeasureTemplate(attune.getImaTemplate());
                 user.setMeasureList(measurementList);
             }
-
+            System.out.print("ima stored\n");
             if (attune.getEkCrt() != null) {
                 byte[] crt_der = Hex.decode(attune.getEkCrt());
                 CertificateFactory certFactory = CertificateFactory.getInstance("X.509");
@@ -235,8 +235,9 @@ public class CoreService {
                 user.setEkPub(Hex.toHexString(key.getModulus().toByteArray()));
 
                 caManager.verify(eKCert);
-                user.setEkCrtAttest("Passed");
+                user.setEkCrtAttest("Passed\n");
             }
+            System.out.print("EK stored and passed");
 
             /**
              * Sorting of SHA1 & SHA256 bank indexes.
@@ -312,6 +313,7 @@ public class CoreService {
                         sorted_pcrs[sorted_pcrs_i++] = sha2PCRValue[sortedIndices[i]];
                     }
                 }
+                System.out.print("processing hashes\n");
                 sorted_sha2Bank = IntStream.of(sha2Bank).boxed().sorted(Comparator.naturalOrder()).mapToInt(i -> i).toArray();
                 user.setSha256Bank(Arrays.toString(sorted_sha2Bank));
 
@@ -332,6 +334,7 @@ public class CoreService {
             /**
              * Sorting END
              */
+            System.out.print("everything passed, time to save the data\n");
 
             userRepository.save(user);
 
