@@ -1,1 +1,394 @@
-<mxfile host="app.diagrams.net" modified="2021-08-04T16:00:04.447Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36" etag="ulZGWxQcvfeYYZ6x2sIs" version="14.9.4" type="device"><diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">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</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2021-09-07T15:09:55.795Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36" etag="a_wIU_x033Hdb6nLNtjU" version="14.9.4" type="github">
+  <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
+    <mxGraphModel dx="1673" dy="1038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="3nuBFxr9cyL0pnOWT2aG-1" value="TPM2.0" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="80" y="80" width="120" height="1150" as="geometry" />
+        </mxCell>
+        <mxCell id="3nuBFxr9cyL0pnOWT2aG-5" value="Device" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="320" y="80" width="120" height="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-3" value="Attestor" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="560" y="80" width="120" height="1170" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-5" value="TPM Manufacturer" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1110" y="80" width="120" height="510" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-15" value="READ" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="184.99666666666673" y="30.000000000000142" as="targetPoint" />
+            <mxPoint x="290" y="30" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-16" value="WRITE" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="50" as="sourcePoint" />
+            <mxPoint x="184" y="50" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-21" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="50" y="140" width="70" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-12" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="PK25MbMjysthuU5o7wJD-21" vertex="1">
+          <mxGeometry x="50" width="20" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-14" value="Certification&lt;br&gt;Creation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="PK25MbMjysthuU5o7wJD-21" vertex="1">
+          <mxGeometry x="-10" y="30" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-22" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="55" y="360" width="70" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-23" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="PK25MbMjysthuU5o7wJD-22" vertex="1">
+          <mxGeometry x="50" y="130" width="20" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="PK25MbMjysthuU5o7wJD-24" value="Attune" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="PK25MbMjysthuU5o7wJD-22" vertex="1">
+          <mxGeometry y="190" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-1" value="Read EK PuK" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1170" y="160" as="targetPoint" />
+            <mxPoint x="150" y="160" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-2" value="Store certificate EK cert" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1170" y="210" as="sourcePoint" />
+            <mxPoint x="140" y="210" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-3" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="1170.003529411765" y="152" as="sourcePoint" />
+            <mxPoint x="1170.003529411765" y="207.99999999999977" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="1220.68" y="152" />
+              <mxPoint x="1220.68" y="208" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-4" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Create certificate&lt;br&gt;using MPiK&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-3" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="67" y="28" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-5" value="&lt;font style=&quot;font-size: 15px&quot;&gt;&lt;span&gt;Legend:&lt;/span&gt;&lt;br&gt;KP: key pair (PiK + PuK)&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;PuK: Public Key&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;PiK: Private Key&lt;br&gt;&lt;/span&gt;Key PubDara: Public key + Attributes key&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;Manufacturer: Creator of the IoT oracle&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;MPiK: Manufacturer PiK&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;Device: Microcontroller (or any devices) controlling the oracle&lt;/span&gt;&lt;br&gt;&lt;div&gt;&lt;span&gt;&lt;font style=&quot;font-size: 15px&quot;&gt;IoT_O: IoT oracle (device + HSM)&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="463" width="420" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-9" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px&quot;&gt;Device arrives&lt;br&gt;&amp;nbsp;end user&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="25" y="260" width="100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-12" value="Send AK PuBData +&#xa;EK cert +&#xa;Ref_Me +&#xa;One-use key&#xa;" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry x="0.0052" y="-15" relative="1" as="geometry">
+            <mxPoint x="381.25" y="538" as="sourcePoint" />
+            <mxPoint x="620" y="538" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-17" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140.00352941176493" y="340" as="sourcePoint" />
+            <mxPoint x="140.00352941176493" y="395.99999999999966" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190.68000000000006" y="340" />
+              <mxPoint x="190.68000000000006" y="396" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-18" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Create AK&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-17" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="47" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-26" value="&lt;font style=&quot;font-size: 15px&quot;&gt;*tpm2_loadexternal -G rsa -C o -u signing_key_public.pem -c signing_key.ctx -n signing_key.name&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="20" y="1270" width="670" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-44" value="AutPuK" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="717" as="sourcePoint" />
+            <mxPoint x="380" y="717" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-48" value="CA" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="880" y="80" width="120" height="1190" as="geometry" />
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-49" value="" style="endArrow=none;html=1;strokeWidth=3;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="125" y="270" as="sourcePoint" />
+            <mxPoint x="1260" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-52" value="AK PuBData + EK PuBData" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry x="-0.089" relative="1" as="geometry">
+            <mxPoint x="141.25" y="500" as="sourcePoint" />
+            <mxPoint x="380" y="500" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-53" value="EK PuBData" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.089" relative="1" as="geometry">
+            <mxPoint x="140" y="330" as="sourcePoint" />
+            <mxPoint x="378.75" y="330" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-54" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620.0035294117652" y="537" as="sourcePoint" />
+            <mxPoint x="620.0035294117652" y="592.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="670.6800000000001" y="537" />
+              <mxPoint x="670.6800000000001" y="593" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-55" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;One-use key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;EK cert&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;,&lt;br&gt;Assert AK is an &lt;br&gt;attestation key (attributes)&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Make_credential(EKPuK,&lt;br&gt;Ak_name,AutPuK)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-54" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="100" y="45" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-56" value="Server PuK" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="380" y="630" as="targetPoint" />
+            <mxPoint x="620" y="630" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-57" value="One-use Key, Attestor_IP" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="380" y="430" as="targetPoint" />
+            <mxPoint x="620" y="430" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-58" value="One-use key to verify Device is Device,&lt;br&gt;and to lock the registration&lt;br&gt;&amp;nbsp;process to only one use" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="620" y="280" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-59" value="Send Credential" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="140" y="630" as="targetPoint" />
+            <mxPoint x="380" y="630" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-60" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140.00352941176493" y="647" as="sourcePoint" />
+            <mxPoint x="140.00352941176493" y="702.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190.68000000000006" y="647" />
+              <mxPoint x="190.68000000000006" y="703" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-61" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Activate_credential(&lt;br&gt;EKPuK, AK_name,&lt;br&gt;credential)&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-60" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="77" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-63" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140.00352941176493" y="727" as="sourcePoint" />
+            <mxPoint x="140.00352941176493" y="782.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190.68000000000006" y="727" />
+              <mxPoint x="190.68000000000006" y="783" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-64" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Create sealed key (SeK)&lt;br&gt;sealed to AutPuK&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-63" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="77" y="15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-66" value="Send Sealedkey_PuBData" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="797" as="sourcePoint" />
+            <mxPoint x="380" y="797" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-67" value="Send Sealedkey_PuBData" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="797" as="sourcePoint" />
+            <mxPoint x="620" y="797" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-68" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="380.00352941176516" y="1100" as="sourcePoint" />
+            <mxPoint x="380.00352941176516" y="1155.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="430.68000000000006" y="1100" />
+              <mxPoint x="430.68000000000006" y="1156" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-69" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Nomal working process:&lt;br&gt;Generate data,&lt;br&gt;Generate Data digest&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-68" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="80" y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-70" value="&lt;font&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;**&lt;/span&gt;&lt;span style=&quot;color: rgb(36 , 41 , 46)&quot;&gt;&lt;font style=&quot;font-size: 15px&quot;&gt;tpm2_policyauthorize -S session.ctx -L authorized.policy -n signing_key.name&lt;/font&gt;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="20" y="1310" width="540" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-2" value="Send Sealedkey_PuBK" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="917" as="sourcePoint" />
+            <mxPoint x="940" y="917" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-3" value="Send certificate  (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="620" y="957" as="targetPoint" />
+            <mxPoint x="940" y="957" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-4" value="Send certificate (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="380" y="957" as="targetPoint" />
+            <mxPoint x="630" y="957" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-5" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="50" y="660" width="70" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-6" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-5" vertex="1">
+          <mxGeometry x="50" width="20" height="290" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-7" value="Key creation and Validation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-5" vertex="1">
+          <mxGeometry y="135" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-9" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="50" y="980" width="70" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-10" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-9" vertex="1">
+          <mxGeometry x="50" width="20" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-11" value="Attestation process" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-9" vertex="1">
+          <mxGeometry y="51.206896551724135" width="40" height="7.586206896551724" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-12" value="Send signed (AK) quote" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.089" relative="1" as="geometry">
+            <mxPoint x="140" y="1010" as="sourcePoint" />
+            <mxPoint x="378.75" y="1010" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-13" value="Send signed quote" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.089" relative="1" as="geometry">
+            <mxPoint x="381.25" y="1010" as="sourcePoint" />
+            <mxPoint x="620" y="1010" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-14" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="620.0035294117652" y="1010" as="sourcePoint" />
+            <mxPoint x="620.0035294117652" y="1065.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="670.6800000000001" y="1010" />
+              <mxPoint x="670.6800000000001" y="1066" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-15" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate AK, Validate quote&lt;br&gt;If yes,&lt;br&gt;Sing authorization for sealedK with:&lt;br&gt;current state PCR10 and&lt;br&gt;&amp;nbsp;current state reset session&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-7gtEHVr5MvBsyLJ3Pri-14" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="120" y="22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-16" value="Send authorization&#xa; signed (AutK)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="1070" as="targetPoint" />
+            <mxPoint x="620" y="1070" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-17" value="Send authorization&#xa; signed (AutK)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="1154.5" as="targetPoint" />
+            <mxPoint x="380" y="1154.5" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-18" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="40" y="1100" width="80" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-19" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-18" vertex="1">
+          <mxGeometry x="57.14285714285714" width="22.857142857142854" height="210" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-20" value="Daily life functionality" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-18" vertex="1">
+          <mxGeometry y="97.75862068965517" width="45.71428571428571" height="14.482758620689657" as="geometry" />
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-21" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="630.0035294117652" y="807" as="sourcePoint" />
+            <mxPoint x="630.0035294117652" y="862.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="680.6800000000001" y="807" />
+              <mxPoint x="680.6800000000001" y="863" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-22" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate Auth_name*,&lt;br&gt;Generate Authorized.policy**,&lt;br&gt;Check in PuBData&#39;s&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;authPolicy&lt;/b&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&amp;nbsp;for:***&lt;br&gt;&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy_TPM=&lt;/b&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy_Server&lt;br&gt;&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;HAy queue verificar queue sealedkey esta stored e el tpm, esto falta y es esenciaö&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-7gtEHVr5MvBsyLJ3Pri-21" vertex="1" connectable="0">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="160" y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-23" value="Ack" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="0.0052" relative="1" as="geometry">
+            <mxPoint x="140" y="1190" as="sourcePoint" />
+            <mxPoint x="378.75" y="1190" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-24" value="Sign Data_digest (SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="1230" as="targetPoint" />
+            <mxPoint x="380" y="1230" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-25" value="Signature" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="0.0052" relative="1" as="geometry">
+            <mxPoint x="140" y="1269" as="sourcePoint" />
+            <mxPoint x="378.75" y="1269" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-26" value="Send data, signed data (AutKey)&#xa;and certificate (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+          <mxGeometry x="-0.089" relative="1" as="geometry">
+            <mxPoint x="380" y="1280" as="sourcePoint" />
+            <mxPoint x="1160" y="1280" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-27" value="Device stakeholder" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="1100" width="120" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="82Z_mEPh2DG9AXx7ghSx-1" value="&lt;font&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;*** for this process check scheme &quot;recreating authPolicy digest&quot;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="20" y="1350" width="440" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="IXNeOV9_xC59NTI-1Gqs-8" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="105" y="300" width="20" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="IXNeOV9_xC59NTI-1Gqs-9" value="Key provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="40" y="370" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="IXNeOV9_xC59NTI-1Gqs-10" value="Get reference measurements (Ref_Me)_" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" edge="1" parent="1">
+          <mxGeometry x="-0.089" relative="1" as="geometry">
+            <mxPoint x="140" y="463" as="sourcePoint" />
+            <mxPoint x="378.75" y="463" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
