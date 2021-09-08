@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-09-07T15:09:55.795Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36" etag="a_wIU_x033Hdb6nLNtjU" version="14.9.4" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-08T14:52:13.598Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36" etag="-p-jYra2OrU2HdwCJ8Ph" version="15.1.0" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
-    <mxGraphModel dx="1673" dy="1038" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1185" dy="735" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -73,13 +73,13 @@
             <mxPoint x="67" y="28" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="x-Ay-M83Ov1TleOutt_n-5" value="&lt;font style=&quot;font-size: 15px&quot;&gt;&lt;span&gt;Legend:&lt;/span&gt;&lt;br&gt;KP: key pair (PiK + PuK)&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;PuK: Public Key&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;PiK: Private Key&lt;br&gt;&lt;/span&gt;Key PubDara: Public key + Attributes key&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;Manufacturer: Creator of the IoT oracle&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;MPiK: Manufacturer PiK&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;Device: Microcontroller (or any devices) controlling the oracle&lt;/span&gt;&lt;br&gt;&lt;div&gt;&lt;span&gt;&lt;font style=&quot;font-size: 15px&quot;&gt;IoT_O: IoT oracle (device + HSM)&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
-          <mxGeometry x="1100" y="463" width="420" height="150" as="geometry" />
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-5" value="&lt;font style=&quot;font-size: 15px&quot;&gt;&lt;span&gt;Legend:&lt;/span&gt;&lt;br&gt;KP: key pair (PiK + PuK)&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;PuK: Public Key&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;PiK: Private Key&lt;br&gt;&lt;/span&gt;Key PubDara: Public key + Attributes key&lt;br&gt;Aut KP: Key stored in the server used to authorize the use of the sealed KP&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;Manufacturer: Creator of the IoT oracle&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;MPiK: Manufacturer PiK&lt;/span&gt;&lt;br&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;Device: Microcontroller (or any devices) controlling the oracle&lt;/span&gt;&lt;br&gt;&lt;div&gt;&lt;span&gt;&lt;font style=&quot;font-size: 15px&quot;&gt;IoT_O: IoT oracle (device + HSM)&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="453" width="520" height="170" as="geometry" />
         </mxCell>
         <mxCell id="x-Ay-M83Ov1TleOutt_n-9" value="&lt;b&gt;&lt;font style=&quot;font-size: 13px&quot;&gt;Device arrives&lt;br&gt;&amp;nbsp;end user&lt;/font&gt;&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="25" y="260" width="100" height="30" as="geometry" />
         </mxCell>
-        <mxCell id="x-Ay-M83Ov1TleOutt_n-12" value="Send AK PuBData +&#xa;EK cert +&#xa;Ref_Me +&#xa;One-use key&#xa;" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-12" value="Send AK PuBData +&#xa;EK PuBData +&#xa;Ref_Me +&#xa;One-use key&#xa;" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
           <mxGeometry x="0.0052" y="-15" relative="1" as="geometry">
             <mxPoint x="381.25" y="538" as="sourcePoint" />
             <mxPoint x="620" y="538" as="targetPoint" />
@@ -144,12 +144,12 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="x-Ay-M83Ov1TleOutt_n-55" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;One-use key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;EK cert&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;,&lt;br&gt;Assert AK is an &lt;br&gt;attestation key (attributes)&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Make_credential(EKPuK,&lt;br&gt;Ak_name,AutPuK)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-54" vertex="1" connectable="0">
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-55" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;One-use key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;EK PuBData&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;,&lt;br&gt;Assert AK is an &lt;br&gt;attestation key (attributes)&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Make_credential(EKPuK,&lt;br&gt;Ak_name,AutPuK)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-54" vertex="1" connectable="0">
           <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
             <mxPoint x="100" y="45" as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="x-Ay-M83Ov1TleOutt_n-56" value="Server PuK" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-56" value="Credential" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="-0.04" relative="1" as="geometry">
             <mxPoint x="380" y="630" as="targetPoint" />
             <mxPoint x="620" y="630" as="sourcePoint" />
@@ -210,7 +210,7 @@
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="x-Ay-M83Ov1TleOutt_n-67" value="Send Sealedkey_PuBData" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-67" value="Send SeK_PuBData" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="380" y="797" as="sourcePoint" />
             <mxPoint x="620" y="797" as="targetPoint" />
@@ -219,11 +219,11 @@
         </mxCell>
         <mxCell id="x-Ay-M83Ov1TleOutt_n-68" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="380.00352941176516" y="1100" as="sourcePoint" />
-            <mxPoint x="380.00352941176516" y="1155.9999999999995" as="targetPoint" />
+            <mxPoint x="380.00352941176516" y="1223" as="sourcePoint" />
+            <mxPoint x="380.00352941176516" y="1278.9999999999995" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="430.68000000000006" y="1100" />
-              <mxPoint x="430.68000000000006" y="1156" />
+              <mxPoint x="430.68000000000006" y="1223" />
+              <mxPoint x="430.68000000000006" y="1279" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -237,22 +237,22 @@
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-2" value="Send Sealedkey_PuBK" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="620" y="917" as="sourcePoint" />
-            <mxPoint x="940" y="917" as="targetPoint" />
+            <mxPoint x="620" y="1040" as="sourcePoint" />
+            <mxPoint x="940" y="1040" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-3" value="Send certificate  (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="-0.04" relative="1" as="geometry">
-            <mxPoint x="620" y="957" as="targetPoint" />
-            <mxPoint x="940" y="957" as="sourcePoint" />
+            <mxPoint x="620" y="1080" as="targetPoint" />
+            <mxPoint x="940" y="1080" as="sourcePoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-4" value="Send certificate (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="-0.04" relative="1" as="geometry">
-            <mxPoint x="380" y="957" as="targetPoint" />
-            <mxPoint x="630" y="957" as="sourcePoint" />
+            <mxPoint x="380" y="1080" as="targetPoint" />
+            <mxPoint x="630" y="1080" as="sourcePoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
@@ -260,13 +260,13 @@
           <mxGeometry x="50" y="660" width="70" height="290" as="geometry" />
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-6" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-5" vertex="1">
-          <mxGeometry x="50" width="20" height="290" as="geometry" />
+          <mxGeometry x="50" width="20" height="289.99999999999994" as="geometry" />
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-7" value="Key creation and Validation" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-5" vertex="1">
-          <mxGeometry y="135" width="40" height="20" as="geometry" />
+          <mxGeometry y="134.99999999999997" width="40" height="19.999999999999996" as="geometry" />
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-9" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="50" y="980" width="70" height="110" as="geometry" />
+          <mxGeometry x="50" y="1103" width="70" height="110" as="geometry" />
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-10" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-9" vertex="1">
           <mxGeometry x="50" width="20" height="110" as="geometry" />
@@ -276,25 +276,25 @@
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-12" value="Send signed (AK) quote" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="-0.089" relative="1" as="geometry">
-            <mxPoint x="140" y="1010" as="sourcePoint" />
-            <mxPoint x="378.75" y="1010" as="targetPoint" />
+            <mxPoint x="140" y="1133" as="sourcePoint" />
+            <mxPoint x="378.75" y="1133" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-13" value="Send signed quote" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="-0.089" relative="1" as="geometry">
-            <mxPoint x="381.25" y="1010" as="sourcePoint" />
-            <mxPoint x="620" y="1010" as="targetPoint" />
+            <mxPoint x="381.25" y="1133" as="sourcePoint" />
+            <mxPoint x="620" y="1133" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-14" value="" style="curved=1;endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="620.0035294117652" y="1010" as="sourcePoint" />
-            <mxPoint x="620.0035294117652" y="1065.9999999999995" as="targetPoint" />
+            <mxPoint x="620.0035294117652" y="1133" as="sourcePoint" />
+            <mxPoint x="620.0035294117652" y="1188.9999999999995" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="670.6800000000001" y="1010" />
-              <mxPoint x="670.6800000000001" y="1066" />
+              <mxPoint x="670.6800000000001" y="1133" />
+              <mxPoint x="670.6800000000001" y="1189" />
             </Array>
           </mxGeometry>
         </mxCell>
@@ -305,20 +305,20 @@
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-16" value="Send authorization&#xa; signed (AutK)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="380" y="1070" as="targetPoint" />
-            <mxPoint x="620" y="1070" as="sourcePoint" />
+            <mxPoint x="380" y="1193" as="targetPoint" />
+            <mxPoint x="620" y="1193" as="sourcePoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-17" value="Send authorization&#xa; signed (AutK)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="140" y="1154.5" as="targetPoint" />
-            <mxPoint x="380" y="1154.5" as="sourcePoint" />
+            <mxPoint x="140" y="1277.5" as="targetPoint" />
+            <mxPoint x="380" y="1277.5" as="sourcePoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-18" value="" style="group;fontStyle=1;fontSize=13;" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="40" y="1100" width="80" height="210" as="geometry" />
+          <mxGeometry x="40" y="1223" width="80" height="210" as="geometry" />
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-19" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-18" vertex="1">
           <mxGeometry x="57.14285714285714" width="22.857142857142854" height="210" as="geometry" />
@@ -336,36 +336,36 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-22" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate Auth_name*,&lt;br&gt;Generate Authorized.policy**,&lt;br&gt;Check in PuBData&#39;s&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;authPolicy&lt;/b&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&amp;nbsp;for:***&lt;br&gt;&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy_TPM=&lt;/b&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy_Server&lt;br&gt;&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;HAy queue verificar queue sealedkey esta stored e el tpm, esto falta y es esenciaö&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-7gtEHVr5MvBsyLJ3Pri-21" vertex="1" connectable="0">
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-22" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate Auth_name*,&lt;br&gt;Generate Authorized.policy**,&lt;br&gt;Check in SeK_PuBData&#39;s&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;font style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;authPolicy&lt;/b&gt;&lt;/font&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&amp;nbsp;for:***&lt;br&gt;&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy_TPM=&lt;/b&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy_Server&lt;br&gt;&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate random_Nonce&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Make_credential(EKPuK,&lt;br&gt;SeK_name,&lt;/b&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;random_Nonce&lt;/b&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;)&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="-7gtEHVr5MvBsyLJ3Pri-21" vertex="1" connectable="0">
           <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
-            <mxPoint x="160" y="12" as="offset" />
+            <mxPoint x="167" y="13" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-23" value="Ack" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="0.0052" relative="1" as="geometry">
-            <mxPoint x="140" y="1190" as="sourcePoint" />
-            <mxPoint x="378.75" y="1190" as="targetPoint" />
+            <mxPoint x="140" y="1313" as="sourcePoint" />
+            <mxPoint x="378.75" y="1313" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-24" value="Sign Data_digest (SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="140" y="1230" as="targetPoint" />
-            <mxPoint x="380" y="1230" as="sourcePoint" />
+            <mxPoint x="140" y="1353" as="targetPoint" />
+            <mxPoint x="380" y="1353" as="sourcePoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-25" value="Signature" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="0.0052" relative="1" as="geometry">
-            <mxPoint x="140" y="1269" as="sourcePoint" />
-            <mxPoint x="378.75" y="1269" as="targetPoint" />
+            <mxPoint x="140" y="1392" as="sourcePoint" />
+            <mxPoint x="378.75" y="1392" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-26" value="Send data, signed data (AutKey)&#xa;and certificate (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="1" edge="1">
           <mxGeometry x="-0.089" relative="1" as="geometry">
-            <mxPoint x="380" y="1280" as="sourcePoint" />
-            <mxPoint x="1160" y="1280" as="targetPoint" />
+            <mxPoint x="380" y="1403" as="sourcePoint" />
+            <mxPoint x="1160" y="1403" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
@@ -375,18 +375,64 @@
         <mxCell id="82Z_mEPh2DG9AXx7ghSx-1" value="&lt;font&gt;&lt;span style=&quot;font-size: 15px&quot;&gt;*** for this process check scheme &quot;recreating authPolicy digest&quot;&lt;/span&gt;&lt;br&gt;&lt;/font&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;" parent="1" vertex="1">
           <mxGeometry x="20" y="1350" width="440" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="IXNeOV9_xC59NTI-1Gqs-8" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="IXNeOV9_xC59NTI-1Gqs-8" value="" style="shape=curlyBracket;whiteSpace=wrap;html=1;rounded=1;size=0.5;fontStyle=1;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="105" y="300" width="20" height="110" as="geometry" />
         </mxCell>
-        <mxCell id="IXNeOV9_xC59NTI-1Gqs-9" value="Key provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" vertex="1" parent="1">
+        <mxCell id="IXNeOV9_xC59NTI-1Gqs-9" value="Key provisioning" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="40" y="370" width="40" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="IXNeOV9_xC59NTI-1Gqs-10" value="Get reference measurements (Ref_Me)_" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" edge="1" parent="1">
+        <mxCell id="IXNeOV9_xC59NTI-1Gqs-10" value="Get reference measurements (Ref_Me)_" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
           <mxGeometry x="-0.089" relative="1" as="geometry">
             <mxPoint x="140" y="463" as="sourcePoint" />
             <mxPoint x="378.75" y="463" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-1" value="Credential" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" edge="1" parent="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="380" y="860" as="targetPoint" />
+            <mxPoint x="620" y="860" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-2" value="Credential" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" edge="1" parent="1">
+          <mxGeometry x="-0.04" relative="1" as="geometry">
+            <mxPoint x="140" y="860" as="targetPoint" />
+            <mxPoint x="380" y="860" as="sourcePoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-3" value="random_Nonce" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="140" y="949.17" as="sourcePoint" />
+            <mxPoint x="380" y="949.17" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-4" value="" style="curved=1;endArrow=classic;html=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="140.00352941176493" y="879.17" as="sourcePoint" />
+            <mxPoint x="140.00352941176493" y="935.1699999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="190.68000000000006" y="879.17" />
+              <mxPoint x="190.68000000000006" y="935.17" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-5" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Activate_credential(&lt;br&gt;EKPuK,&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;SeK_name&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;,&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;Credential&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;)&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="dKExhv86BuXlmzeER8vV-4">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="77" y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-6" value="random_Nonce" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="950.0000000000001" as="sourcePoint" />
+            <mxPoint x="620" y="950.0000000000001" as="targetPoint" />
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dKExhv86BuXlmzeER8vV-8" value="&lt;b style=&quot;font-size: 13px&quot;&gt;If randm_nonce is valid, the SeK was stored&amp;nbsp;&lt;br&gt;&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;in the TPM and then all the information&lt;br&gt;&amp;nbsp;in SeK_PuBData was real&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
+          <mxGeometry x="800.0000000000001" y="939.9968627450986" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
