@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-09-24T11:13:00.379Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="g4Kx2EZ_ZX7ph0oqaJFV" version="15.2.5" type="github">
+<mxfile host="app.diagrams.net" modified="2021-09-24T15:09:49.959Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.82 Safari/537.36" etag="vEk9nw-WRQ4gRKPRk-tg" version="15.3.1" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
-    <mxGraphModel dx="1422" dy="882" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1422" dy="922" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -10,21 +10,21 @@
         <mxCell id="3nuBFxr9cyL0pnOWT2aG-5" value="Device" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="320" y="80" width="120" height="1370" as="geometry" />
         </mxCell>
-        <mxCell id="x-Ay-M83Ov1TleOutt_n-67" value="Cert_SeK and SeK.pub" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="3nuBFxr9cyL0pnOWT2aG-5" edge="1">
+        <mxCell id="x-Ay-M83Ov1TleOutt_n-67" value="Cert_SeK, signature, and SeK.pub" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="3nuBFxr9cyL0pnOWT2aG-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="60" y="800" as="sourcePoint" />
             <mxPoint x="300" y="800" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-2" value="Cert_SeK" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" edge="1" parent="3nuBFxr9cyL0pnOWT2aG-5">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-2" value="Cert_SeK" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="3nuBFxr9cyL0pnOWT2aG-5" edge="1">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="-180" y="794.5" as="sourcePoint" />
             <mxPoint x="60" y="794.5" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-3" value="" style="curved=1;endArrow=classic;html=1;" edge="1" parent="3nuBFxr9cyL0pnOWT2aG-5">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-3" value="" style="curved=1;endArrow=classic;html=1;" parent="3nuBFxr9cyL0pnOWT2aG-5" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-179.99647058823507" y="730" as="sourcePoint" />
             <mxPoint x="-179.99647058823507" y="785.9999999999995" as="targetPoint" />
@@ -34,7 +34,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-4" value="&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;Sign_certification of&lt;/span&gt;&lt;br style=&quot;padding: 0px ; margin: 0px ; font-size: 13px ; font-weight: 700&quot;&gt;&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;sealed key (Cert_SeK)&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="LwqqrGVOomV46JIBTcHT-3">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-4" value="&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;Sign_certification of&lt;/span&gt;&lt;br style=&quot;padding: 0px ; margin: 0px ; font-size: 13px ; font-weight: 700&quot;&gt;&lt;span style=&quot;font-size: 13px ; font-weight: 700&quot;&gt;sealed key (Cert_SeK)&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="LwqqrGVOomV46JIBTcHT-3" vertex="1" connectable="0">
           <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
             <mxPoint x="77" y="15" as="offset" />
           </mxGeometry>
@@ -42,7 +42,7 @@
         <mxCell id="PK25MbMjysthuU5o7wJD-3" value="Attestor" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="560" y="80" width="120" height="1360" as="geometry" />
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-8" value="" style="curved=1;endArrow=classic;html=1;" edge="1" parent="PK25MbMjysthuU5o7wJD-3">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-8" value="" style="curved=1;endArrow=classic;html=1;" parent="PK25MbMjysthuU5o7wJD-3" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="60.00352941176516" y="800" as="sourcePoint" />
             <mxPoint x="60.00352941176516" y="855.9999999999995" as="targetPoint" />
@@ -52,7 +52,7 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-9" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Validate&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;certificarte&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Validate Sek&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="LwqqrGVOomV46JIBTcHT-8">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-9" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Validate&amp;nbsp;&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;certificarte&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Validate Sek&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="LwqqrGVOomV46JIBTcHT-8" vertex="1" connectable="0">
           <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
             <mxPoint x="70" y="25" as="offset" />
           </mxGeometry>
@@ -158,7 +158,7 @@
         <mxCell id="x-Ay-M83Ov1TleOutt_n-48" value="CA" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="880" y="80" width="120" height="1380" as="geometry" />
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-11" value="" style="endArrow=classic;html=1;" edge="1" parent="x-Ay-M83Ov1TleOutt_n-48">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-11" value="" style="endArrow=classic;html=1;" parent="x-Ay-M83Ov1TleOutt_n-48" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="-70" y="820" as="sourcePoint" />
             <mxPoint x="120" y="809.83" as="targetPoint" />
@@ -419,25 +419,25 @@
         <mxCell id="Ohl9aql_d3aA6owAKOWW-1" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Create Aut KP&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Make_credential(EKPuK,&lt;br&gt;Ak_name,AutPuK)&lt;br&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
           <mxGeometry x="760.0035294117652" y="590" as="geometry" />
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-10" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate certificate:&lt;br&gt;It starts with magic number&amp;nbsp;&lt;/b&gt;&lt;/span&gt;0xff544347&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;it is a attest certificate&amp;nbsp;&lt;/b&gt;&lt;/span&gt;0x8017&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;Signed by attestation key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-10" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate certificate:&lt;br&gt;It starts with magic number&amp;nbsp;&lt;/b&gt;&lt;/span&gt;0xff544347&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;it is a attest certificate&amp;nbsp;&lt;/b&gt;&lt;/span&gt;0x8017&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;Signed by attestation key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1120.0035294117652" y="889.83" as="geometry" />
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-12" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate SeK:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Assert the SeK attributes&lt;br&gt;Generate Authorized.policy&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Assert the correct&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-12" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate SeK:&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Assert the SeK attributes&lt;br&gt;Generate Authorized.policy&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Assert the correct&amp;nbsp;&lt;/b&gt;&lt;/span&gt;&lt;b style=&quot;font-size: 13px&quot;&gt;Authorized.policy&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1120.0035294117652" y="969.83" as="geometry" />
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-13" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-13" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="790" y="930" as="sourcePoint" />
             <mxPoint x="1040" y="969.83" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-14" value="" style="endArrow=classic;html=1;" edge="1" parent="1">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-14" value="" style="endArrow=classic;html=1;" parent="1" edge="1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="1210" y="979.83" as="sourcePoint" />
             <mxPoint x="1280" y="979.83" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="LwqqrGVOomV46JIBTcHT-15" value="&lt;b style=&quot;font-size: 13px&quot;&gt;Generate Authorized.policy:&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate Auth.name&lt;br&gt;Generate Policyauthorized**&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="1">
+        <mxCell id="LwqqrGVOomV46JIBTcHT-15" value="&lt;b style=&quot;font-size: 13px&quot;&gt;Generate Authorized.policy:&lt;/b&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/span&gt;&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate Auth.name&lt;br&gt;Generate Policyauthorized**&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="1" vertex="1" connectable="0">
           <mxGeometry x="1380.0035294117652" y="969.83" as="geometry" />
         </mxCell>
       </root>
