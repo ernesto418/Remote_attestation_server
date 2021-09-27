@@ -37,6 +37,7 @@ import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.nio.ByteBuffer;
+import com.ifx.server.tss.TPM_policies;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -47,7 +48,10 @@ public class RSAkey {
 	public RSAkey() {
     }
 	
-	
+	/**
+     * Generate a pseudorandom Key peir
+     * @return success or fail
+     */
     public boolean generateKeyPair() throws Exception {
     	try {
 	        KeyPairGenerator generator = KeyPairGenerator.getInstance("RSA");
@@ -79,7 +83,13 @@ public class RSAkey {
         return new String(decriptCipher.doFinal(bytes), UTF_8);
     }
 
-
+    /**
+     * Verify a signature from the data, signature and public key
+     * @param plainText Data signed
+     * @param signature
+     * @param publicKey Public key used to generate the signature
+     * @return success or fail
+     */
     public static boolean verify(String plainText, String signature, PublicKey publicKey) throws Exception {
         Signature publicSignature = Signature.getInstance("SHA256withRSA");
         publicSignature.initVerify(publicKey);
@@ -91,9 +101,19 @@ public class RSAkey {
     }
 
     public String resetsession_debugg(int resetcount) throws Exception {
-        byte[] policy_session=Policyreset_creation(resetcount); 
+       
+        TPM_policies TPM_policies = new TPM_policies();
+
+        byte[] policy_session=TPM_policies.Policyreset_creation(resetcount); 
         return Base64.getEncoder().encodeToString(policy_session);
      }
+
+
+    /**
+     * Create an enabler authorization to use the sealed key for the given Reset value
+     * @param resetcount Reset value of the TPM
+     * @return success or fail
+     */
     public String sign_resetsession(int resetcount) throws Exception {
         byte[] policy_session=Policyreset_creation(resetcount); 
         return sign_byte(policy_session,this.pair.getPrivate());
@@ -126,8 +146,11 @@ public class RSAkey {
     }
     
 
-    /* Import key pairs from PEM format
-     * 
+    /**
+     * Import key pairs from PEM format in the class
+     * @param Private Private key in PEM
+     * @param Public Public key in PEM
+     * @return success or fail
      */
     
     public boolean import_pair(String Private, String Public) {
@@ -156,7 +179,7 @@ public class RSAkey {
         }
     }
 
-        /***************************************************************
+    /***************************************************************
      * Private methods
      **************************************************************/
 
@@ -172,7 +195,9 @@ public class RSAkey {
     
 
     /**
-     * Export the policyreset
+     * Create the hash of a policy "TPM2_PolicyCounterTimer" where the reset value of th TPM MUST be
+     * the value of resetcount to be satisfied. For more infomation about the policy go to:
+     * https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part3_Commands_code_pub.pdf
      * 
      * @param resetcount int TPM resetcount vlue
      * @return byte array Policyreset
@@ -203,9 +228,9 @@ public class RSAkey {
         System.arraycopy(Last_policy , 0, Policyreset,                  0, Last_policy.length);
         System.arraycopy(countertimer, 0, Policyreset, Last_policy.length, countertimer.length); 
         System.arraycopy(fHash       , 0, Policyreset, Last_policy.length + countertimer.length, fHash.length);
-        byte[] Hasp_policyreset = digest.digest(Policyreset);
+        byte[] Hash_policyreset = digest.digest(Policyreset);
 
-    	return Hasp_policyreset;
+    	return Hash_policyreset;
     }
 
     /**

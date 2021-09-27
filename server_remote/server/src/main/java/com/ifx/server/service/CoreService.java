@@ -33,6 +33,7 @@ import com.ifx.server.service.security.UserValidator;
 import com.ifx.server.tss.CertificationAuthority;
 import com.ifx.server.tss.TPMEngine;
 import com.ifx.server.tss.RSAkey;
+import com.ifx.server.tss.TPM_policies;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -211,6 +212,16 @@ public class CoreService {
             if (user == null || !passwordEncoder.matches(attune.getPassword(),user.getPassword())) {
                 return new Response<String>(Response.STATUS_ERROR, "invalid username or password");
             }
+            //Nullify the one-use key
+            /* Commented for debugging reasons
+            user.setPassword(null);
+            userRepository.save(user);
+            */
+
+            if (!TPMEngine.assert_attributes(attune.getAkPub())) {
+                return new Response<String>(Response.STATUS_ERROR, "Wrong attributes of the \"Attestation Key\"");
+            }
+
             user.setAkPub(attune.getAkPub());
             user.setAkName(TPMEngine.computePubKeyName(attune.getAkPub()));
             user.setEkCrt(attune.getEkCrt());
@@ -345,6 +356,9 @@ public class CoreService {
             user.setPuB_PEM(Public_string);
             userRepository.save(user);
 
+            //Using PuBkey as credential to check that Ak is stored in the TPM
+            String credential_PuBkey = TPMEngine.makeCredential(user.getEkPub(), user.getAkName(), Public_string);
+
             /**
              * Send response to active clients via websocket
              */
@@ -360,11 +374,37 @@ public class CoreService {
             /**
              * Respond to REST service
              */
-            return new Response<String>(Response.STATUS_OK, null,Public_string);
+            return new Response<String>(Response.STATUS_OK, null,credential_PuBkey);
         } catch (Exception e) {
             return new Response<String>(Response.STATUS_ERROR, e.toString());
         }
     }
+
+
+    public Response<String> restKCV(@RequestBody KCV KCV) {
+        try {
+            User user = userRepository.findByUsername(KCV.getUsername());
+            //if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
+            if (user == null) {//Modification, we dont want the necessity of use the password to validate the RB-pi status
+                return new Response<String>(Response.STATUS_ERROR, "invalid username", null);
+            }
+
+            if (attune.getCert_SeK() != null) {
+                String Cert_SeK = KCV.getCert_SeK();
+                TPMEngine.validate_keycertificate();
+            }
+
+
+
+            String SeK_certificate = "";
+            return new Response<String>(Response.STATUS_OK, null,SeK_certificate);
+    
+        } catch (Exception e) {
+        return new Response<String>(Response.STATUS_ERROR, e.toString());
+        }
+    }
+
+
 
     public Response<AtelicResp> restAtelicSample(@RequestBody Atelic atelic) {
         try {
@@ -547,6 +587,10 @@ public class CoreService {
                     RSAkey RSAk = new RSAkey();
                     RSAk.import_pair(user.getPiV_PEM(),user.getPuB_PEM());
                     int resetCount = tpm.getResetcount();
+                    if (resetCount == -1){
+                        return new Response<String>(Response.STATUS_ERROR, "Invalid resetCount in quote (normally is becasue the quote has a bad format)");
+                    }
+
                     String authorization_signature = RSAk.sign_resetsession(resetCount);
                 try {
                     resp.setOutcome("Passed");
