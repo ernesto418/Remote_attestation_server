@@ -183,10 +183,10 @@ public class TPMEngine {
         }
     }
 
-   public boolean validate_keycertificate(String key_certificate) {
+   public static boolean validate_keycertificate(String key_certificate) {
     try {
         
-        return  quote.quoted.clockInfo.resetCount;
+        return  true;
     } catch (Exception e) {
         return false;
     }
@@ -255,6 +255,7 @@ public class TPMEngine {
                     credential + String.format("%04x", bundle.Secret.length) + encSeed;
             return blob;
         } catch (Exception e) {
+            System.out.print("\n makeCredential: " + e);
             return null;
         }
     }

@@ -34,6 +34,7 @@ import com.ifx.server.tss.CertificationAuthority;
 import com.ifx.server.tss.TPMEngine;
 import com.ifx.server.tss.RSAkey;
 import com.ifx.server.tss.TPM_policies;
+import com.ifx.server.tss.AESengine;
 import org.bouncycastle.util.encoders.Hex;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -196,7 +197,7 @@ public class CoreService {
         return new Response<Integer>(Response.STATUS_OK, response.getStatus());
     }
 
-    public Response<String> restAttune(@RequestBody Attune attune) {
+    public Response<AttuneRespDevice> restAttune(@RequestBody Attune attune) {
         try {
             User user = userRepository.findByUsername(attune.getUsername());
             int sorted_pcrs_i = 0;
@@ -210,7 +211,7 @@ public class CoreService {
             String computePcrSha256 = null;
 
             if (user == null || !passwordEncoder.matches(attune.getPassword(),user.getPassword())) {
-                return new Response<String>(Response.STATUS_ERROR, "invalid username or password");
+                return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "invalid username or password",null);
             }
             //Nullify the one-use key
             /* Commented for debugging reasons
@@ -219,7 +220,7 @@ public class CoreService {
             */
 
             if (!TPMEngine.assert_attributes(attune.getAkPub())) {
-                return new Response<String>(Response.STATUS_ERROR, "Wrong attributes of the \"Attestation Key\"");
+                return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "Wrong attributes of the \"Attestation Key\"",null);
             }
 
             user.setAkPub(attune.getAkPub());
@@ -296,7 +297,7 @@ public class CoreService {
                     for (int i = 0; i < sorted_sha1Bank.length; i++) {
                         if (sorted_sha1Bank[i] == TPMEngine.PLATFORM_PCR) {
                             if (!sorted_pcrs[i].equalsIgnoreCase(computePcrSha1)) {
-                                return new Response<String>(Response.STATUS_ERROR, "SHA1 PCR-10 value mismatch with template re-computed value (check if IMA configuration is done correctly)");
+                                return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "SHA1 PCR-10 value mismatch with template re-computed value (check if IMA configuration is done correctly)",null);
                             }
                         }
                     }
@@ -332,7 +333,7 @@ public class CoreService {
                     for (int i = 0; i < sorted_sha2Bank.length; i++) {
                         if (sorted_sha2Bank[i] == TPMEngine.PLATFORM_PCR) {
                             if (!sorted_pcrs[sha256_start_i + i].equalsIgnoreCase(computePcrSha256)) {
-                                return new Response<String>(Response.STATUS_ERROR, "SHA256 PCR-10 value mismatch with template re-computed value (check if IMA configuration is done correctly)");
+                                return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "SHA256 PCR-10 value mismatch with template re-computed value (check if IMA configuration is done correctly)",null);
                             }
                         }
                     }
@@ -350,15 +351,41 @@ public class CoreService {
             //First generate a public/private key pair
             RSAk.generateKeyPair();            
             String Private_key =  RSAk.PrivateKeytoPEM();
-            String Public_string = RSAk.PublicKeytoPEM();
+            String Public_pem = RSAk.PublicKeytoPEM();
             //Store the private and Public keys NOT SAFE PROCESS, DO NOT USE IN REAL APPLICATIONS
             user.setPiV_PEM(Private_key);
-            user.setPuB_PEM(Public_string);
-            userRepository.save(user);
+            user.setPuB_PEM(Public_pem);
+
+            String AESkey_credential;
+            AESengine AESengine = new AESengine();
 
             //Using PuBkey as credential to check that Ak is stored in the TPM
-            String credential_PuBkey = TPMEngine.makeCredential(user.getEkPub(), user.getAkName(), Public_string);
+            
+            if (user.getEkPub() != null && user.getAkName() != null &&
+                    user.getEkPub() != "" && user.getAkName() != "") {
+                        
+                        //for debug porpuses
+                        System.out.print("\n EkPub " + user.getEkPub());
+                        System.out.print("\n AkName " +user.getAkName());
+                        System.out.print("\n Public_string " + Public_pem);
+                        //
 
+
+                        //Encrypting Auth_PuK
+
+                        AESengine.oneusekey_encryption(Public_pem);
+
+                        // Encrypted qualification
+                        AESkey_credential = TPMEngine.makeCredential(user.getEkPub(), user.getAkName(), AESengine.key);
+                        System.out.print("\n PuK_credential " + AESkey_credential);
+            } else {
+                // qualification in plain
+                //atelicResp.setQualification(qualification);
+                return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "Please, ask to the manager of this account to set the EkPub and the AkName of the device to be attested", null); //modification, we dont want to sent a qualification plain text
+            }
+            AttuneRespDevice resp_dev = new AttuneRespDevice(AESkey_credential,AESengine.cyphertext);
+
+            userRepository.save(user);
             /**
              * Send response to active clients via websocket
              */
@@ -374,9 +401,9 @@ public class CoreService {
             /**
              * Respond to REST service
              */
-            return new Response<String>(Response.STATUS_OK, null,credential_PuBkey);
+            return new Response<AttuneRespDevice>(Response.STATUS_OK, null,resp_dev);
         } catch (Exception e) {
-            return new Response<String>(Response.STATUS_ERROR, e.toString());
+            return new Response<AttuneRespDevice>(Response.STATUS_ERROR, e.toString(),null);
         }
     }
 
@@ -389,9 +416,9 @@ public class CoreService {
                 return new Response<String>(Response.STATUS_ERROR, "invalid username", null);
             }
 
-            if (attune.getCert_SeK() != null) {
+            if (KCV.getCert_SeK() != null) {
                 String Cert_SeK = KCV.getCert_SeK();
-                TPMEngine.validate_keycertificate();
+                TPMEngine.validate_keycertificate("w");
             }
 
 
@@ -599,7 +626,7 @@ public class CoreService {
                 } catch (Exception e) {
                     // ignore
                 }
-                return new Response<String>(Response.STATUS_OK, "passed",authorization_signature);
+                return new Response<String>(Response.STATUS_OK, "Passed",authorization_signature);
             }
         } catch (Exception e) {
             return new Response<String>(Response.STATUS_ERROR, e.toString());

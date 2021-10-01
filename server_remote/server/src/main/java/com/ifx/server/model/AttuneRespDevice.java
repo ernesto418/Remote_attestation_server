@@ -24,16 +24,17 @@
 
 package com.ifx.server.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
+@AllArgsConstructor
 @Getter
 @Setter
-public class KCV {
-    private final String type = "KCV";
-    
-    private String username;
-    private String Cert_SeK;
-    private String signature;
-    private String SekPuB;
+public class AttuneRespDevice {
+    private final String type = "attest-respDevice";
+
+    private String AESkey_credential;
+    private String AuthPuK_encrypted;
+
 }

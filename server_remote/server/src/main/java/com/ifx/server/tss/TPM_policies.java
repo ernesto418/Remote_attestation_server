@@ -5,7 +5,7 @@ import java.io.InputStream;
 import java.security.*;
 import java.util.Base64;
 import java.nio.ByteBuffer;
-
+import org.bouncycastle.util.encoders.Hex;
 
 public class TPM_policies {
     
@@ -24,7 +24,7 @@ public class TPM_policies {
      * @return byte array Policyreset
      */
     
-    private  byte[] Policyreset_creation(int resetcount) throws Exception {
+    public  byte[] Policyreset_creation(int resetcount) throws Exception {
     	//operandB configuration
     	byte[] policy =  hexStringToByteArray("00100000");
     	
@@ -54,6 +54,28 @@ public class TPM_policies {
     	return this.Last_policy;
     }
 
+    /***************************************************************
+     * Private methods
+     **************************************************************/
 
+    /**
+     * Convert hex string to byte array
+     * "000102" -> {0x00, 0x01, 0x02}
+     * @param s hex string
+     * @return byte array
+     */
+    private static byte[] hexStringToByteArray(String s) {
+        return Hex.decode(s);
+    }
+
+    /**
+     * Convert byte array to hex string
+     * {0x00, 0x01, 0x02} -> "000102"
+     * @param ba byte array
+     * @return hex string
+     */
+    private static String byteArrayToHexString(byte[] ba) {
+        return Hex.toHexString(ba);
+    }
 
 }

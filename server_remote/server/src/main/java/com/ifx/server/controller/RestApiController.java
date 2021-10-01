@@ -73,7 +73,7 @@ public class RestApiController {
     }
 
     @PostMapping("/attune")
-    public Response<String> processAttune(@RequestBody Attune attune) {
+    public Response<AttuneRespDevice> processAttune(@RequestBody Attune attune) {
         return coreService.restAttune(attune);
     }
 
