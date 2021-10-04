@@ -10,7 +10,7 @@ import org.bouncycastle.util.encoders.Hex;
 public class TPM_policies {
     
 
-    byte[] Last_policy;
+    public byte[] Last_policy;
     public TPM_policies(){
         this.Last_policy = ByteBuffer.allocate(32).putInt(0).array();
     }
@@ -52,6 +52,36 @@ public class TPM_policies {
         this.Last_policy = digest.digest(Policyreset);
 
     	return this.Last_policy;
+    }
+
+     /**
+     * Create the hash of a policy "TPM2_PolicyCounterTimer" where the reset value of th TPM MUST be
+     * the value of resetcount to be satisfied. For more infomation about the policy go to:
+     * https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part3_Commands_code_pub.pdf
+     * 
+     * @param resetcount int TPM resetcount vlue
+     * @return byte array Policyreset
+     */
+    public  byte[] Policyauthorized_creation(String name) throws Exception {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] key_name = hexStringToByteArray(name);
+            
+            //Policy_countertimer name (TPM_CC_PolicyAuthorize)
+            byte[] Policyauthorize =  hexStringToByteArray("0000016a");
+            
+            // Oldpolicy | command | keySign
+            byte[] Policy_contruction =new byte[68];
+            System.arraycopy(this.Last_policy , 0, Policy_contruction,                  0, this.Last_policy.length);
+            System.arraycopy(Policyauthorize, 0, Policy_contruction, this.Last_policy.length, Policyauthorize.length); 
+            System.arraycopy(key_name       , 0, Policy_contruction, this.Last_policy.length + Policyauthorize.length, key_name.length);
+            this.Last_policy = digest.digest(Policy_contruction);
+            //Two times hashing for this policy
+            this.Last_policy = digest.digest(this.Last_policy);
+            return this.Last_policy;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /***************************************************************

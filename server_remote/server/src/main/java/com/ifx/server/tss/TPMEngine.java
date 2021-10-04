@@ -36,6 +36,7 @@ import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import static tss.Crypto.hash;
+import java.util.Arrays;
 
 public class TPMEngine {
 
@@ -46,6 +47,7 @@ public class TPMEngine {
     public byte[] qualification;
     public TPMT_PUBLIC trustedPK;
     public QuoteResponse quote;
+    public byte[] AttestationCertificate;
 
     public TPMEngine() {
     }
@@ -68,15 +70,12 @@ public class TPMEngine {
     }
 
     /**
-     * Construct TPMT_PUBLIC & PCR_ReadResponse
+     * Construct TPMT_PUBLIC
      * Supports asymmetric cryptography key TPMS_SIG_SCHEME_RSASSA (SHA256) only
      * @param pubKey
-     * @param sha1Bank
-     * @param sha256Bank
-     * @param pcrs
      * @return success or fail
      */
-    public boolean import_publickey_pcr(String pubKey, int[] sha1Bank, int[] sha256Bank, String[] pcrs) {
+    public boolean import_publickey(String pubKey) {
         try {
             /**
              * Generate TPMT_PUBLIC
@@ -92,7 +91,23 @@ public class TPMEngine {
              - Exponent for signature verification
              */
             trustedPK.parameters = new TPMS_RSA_PARMS(TPMT_SYM_DEF_OBJECT.nullObject(), new TPMS_SIG_SCHEME_RSASSA(TPM_ALG_ID.SHA256), 2048, 65537);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
+
+    /**
+     * Construct PCR_ReadResponse
+     * Supports asymmetric cryptography key TPMS_SIG_SCHEME_RSASSA (SHA256) only
+     * @param sha1Bank
+     * @param sha256Bank
+     * @param pcrs
+     * @return success or fail
+     */
+    public boolean import_pcr(int[] sha1Bank, int[] sha256Bank, String[] pcrs) {
+        try {
             /**
              * Generate PCR_ReadResponse
              */
@@ -146,6 +161,49 @@ public class TPMEngine {
         }
     }
 
+    /**
+     * Construct AttestationCertificate
+     * Supports asymmetric cryptography key TPMS_SIG_SCHEME_RSASSA (SHA256) only
+     * @param AttestationCertificate
+     * @return success or fail
+     */
+    public boolean import_AttestationCertificate(String message) {
+        try {
+            /**
+             * Generate TPMT_PUBLIC
+             */
+            String message_string = message;
+            byte[] AttestationCertificate_ = hexStringToByteArray(message_string);
+
+            	
+            // TPM generated?
+            byte[] equal_= Arrays.copyOfRange(AttestationCertificate_, 0, 3);
+            byte[] Magicnumber = {(byte)0xff,(byte)0x54,(byte)0x43,(byte)0x47};
+            if(!Arrays.equals(equal_, Magicnumber)){
+                return false;
+            };
+
+            // TPM attest certificate? (TPM_ST_ATTEST_CERTIFY)
+            equal_= Arrays.copyOfRange(AttestationCertificate_, 4, 5);
+            byte[] TPM_ST_ATTEST_CERTIFY = {(byte)0x80,(byte)0x17};
+            // TPM generated?
+            if(!Arrays.equals(equal_, TPM_ST_ATTEST_CERTIFY)){
+                return false;
+            };
+
+            AttestationCertificate = AttestationCertificate_;
+
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+
+
+
+
+
     public boolean attest() {
         try {
             /**
@@ -156,18 +214,33 @@ public class TPMEngine {
             return false;
         }
     }
-    public boolean verify_signature() {
+    public boolean verify_signature(byte[] message, TPMU_SIGNATURE signature) {
         try {
             /**
-                * Verify signature, (ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature)
+                * Verify signature with loaded AK
                 */
-            byte[] signedBlob = quote.quoted.toTpm();
-            return  Crypto.validateSignature(trustedPK,  signedBlob,  quote.signature);
+            return  Crypto.validateSignature(trustedPK,  message,  signature);
         } catch (Exception e) {
             return false;
         }
     }
+    public boolean verify_signature(byte[] message, String signature_string) {
+        try {
+            //Load signature from string
+            byte[] signature_byte = hexStringToByteArray(signature_string);
+            InByteBuf signature_buffer = new InByteBuf(signature_byte);
+            signature_buffer.readInt(2); //Skip two first bytes
+            TPMU_SIGNATURE signature = new TPMS_SIGNATURE_RSASSA();
+            signature.initFromTpm(signature_buffer);
 
+            /**
+                * Verify signature with loaded AK
+                */
+            return  Crypto.validateSignature(trustedPK,  message,  signature);
+        } catch (Exception e) {
+            return false;
+        }
+    }
     /**
      * Get the reset value of the loaded quote
      * @return Resetcout or fail (-1)
@@ -183,14 +256,6 @@ public class TPMEngine {
         }
     }
 
-   public static boolean validate_keycertificate(String key_certificate) {
-    try {
-        
-        return  true;
-    } catch (Exception e) {
-        return false;
-    }
-    }
 
     /**
      * Calculate PCRs digest
@@ -537,6 +602,21 @@ public class TPMEngine {
         if (string == null || string == "" || string == "[]") return null;
         String[] result = string.replace("[", "").replace("]", "").split(", ");
         return result;
+    }
+
+    /**
+     * From a RSA_modulus, generate the .pub byte array generated by the the command TPM2_loadexternal
+     * @param modulus
+     * @return name
+     */
+    public static String load_external(String modulus) {
+        /*
+        * RSA TPM2 header (kind of object, null policy, attributes, kind of key etc)
+        */
+        String header ="0001000b000600400000001000100800000100010100";
+        String TPMkey_string = header + modulus;
+
+        return TPMkey_string;
     }
 
     /***************************************************************

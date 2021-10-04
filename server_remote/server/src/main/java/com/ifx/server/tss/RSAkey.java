@@ -38,6 +38,8 @@ import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
 import java.nio.ByteBuffer;
 import com.ifx.server.tss.TPM_policies;
+import java.math.BigInteger;
+import org.bouncycastle.util.encoders.Hex;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
@@ -179,6 +181,31 @@ public class RSAkey {
         }
     }
 
+    /**
+     * Get modulus from PEM public key
+     * @param Public_PEM Public key in PEM
+     * @return String Modulus in hexString
+     */
+    
+    public String getModulus(String Public) {
+    	try {
+            
+            KeyFactory kf = KeyFactory.getInstance("RSA");
+            byte[] keyBytes = Base64.getDecoder().decode(Public.getBytes("UTF-8"));
+            X509EncodedKeySpec spec = new X509EncodedKeySpec(keyBytes);
+            PublicKey fileGeneratedPublicKey = kf.generatePublic(spec);
+            RSAPublicKey rsaPub  = (RSAPublicKey)(fileGeneratedPublicKey);
+            BigInteger publicKeyModulus = rsaPub.getModulus();
+            String Modulus=byteArrayToHexString(publicKeyModulus.toByteArray());
+            //debug purposes
+            System.out.println("publicKeyModulus: " + publicKeyModulus);
+    	    
+            return Modulus;
+        } catch (Exception e) {
+        	return null;
+        }
+    }
+
     /***************************************************************
      * Private methods
      **************************************************************/
@@ -258,6 +285,16 @@ public class RSAkey {
                                  + Character.digit(s.charAt(i+1), 16));
         }
         return data;
+    }
+
+    /**
+     * Convert byte array to hex string
+     * {0x00, 0x01, 0x02} -> "000102"
+     * @param ba byte array
+     * @return hex string
+     */
+    private static String byteArrayToHexString(byte[] ba) {
+        return Hex.toHexString(ba);
     }
 }
 

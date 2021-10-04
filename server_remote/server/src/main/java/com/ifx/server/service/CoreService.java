@@ -218,7 +218,13 @@ public class CoreService {
             user.setPassword(null);
             userRepository.save(user);
             */
+            
+            //Loading AK just to check the correctness of AK (better geting the problem here and not at the end of the process)
+            if (TPMEngine.import_publickey(attune.getAkPub()) != true) { //Maybe can be error using a crontructor in a class not initialized
+                return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "Bad Attestation key, please, regenerate using TPMS_SIG_SCHEME_RSASSA (SHA256)",null);
+            }
 
+            //Asserting attributes of Attestation Key
             if (!TPMEngine.assert_attributes(attune.getAkPub())) {
                 return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "Wrong attributes of the \"Attestation Key\"",null);
             }
@@ -359,7 +365,7 @@ public class CoreService {
             String AESkey_credential;
             AESengine AESengine = new AESengine();
 
-            //Using PuBkey as credential to check that Ak is stored in the TPM
+            //Encrypting AuthPub and using decryption key as credential
             
             if (user.getEkPub() != null && user.getAkName() != null &&
                     user.getEkPub() != "" && user.getAkName() != "") {
@@ -372,7 +378,6 @@ public class CoreService {
 
 
                         //Encrypting Auth_PuK
-
                         AESengine.oneusekey_encryption(Public_pem);
 
                         // Encrypted qualification
@@ -416,15 +421,54 @@ public class CoreService {
                 return new Response<String>(Response.STATUS_ERROR, "invalid username", null);
             }
 
-            if (KCV.getCert_SeK() != null) {
-                String Cert_SeK = KCV.getCert_SeK();
-                TPMEngine.validate_keycertificate("w");
+
+            TPMEngine tpm = new TPMEngine();
+
+            /**
+             * Import Attestation Key (already validated in attune)
+             */
+            if (tpm.import_publickey(user.getAkPub()) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "Bad public key, please, repeat attune process");
             }
 
 
+            /**
+             * Import Attestation Certificate
+             */
+            if (tpm.import_AttestationCertificate(KCV.getSeKcert()) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "Bad certificate, use TPM2_certify");
+            }
 
-            String SeK_certificate = "";
-            return new Response<String>(Response.STATUS_OK, null,SeK_certificate);
+
+            /**
+             * Validate authenticity of Attestation Certificate
+             */
+            if (tpm.verify_signature(tpm.AttestationCertificate,KCV.getcertSig()) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "Signature not valid, remember using the same AK used in Attune to sign the certificate");
+            }
+
+            /**
+             * The Certificate is rightful, now we have to valdiate the content, for that, we will recreate the desired policy of our key
+             * It can only be done with the knowledge of AuthPuk
+             */
+            //get Authkey modulus
+            String modulus_key = RSAkey.getModulus(user.getPuB_PEM());
+            if (modulus_key == null) {
+                return new Response<String>(Response.STATUS_ERROR, "Bad Authkey, please, repeat Attune process");
+            }
+
+            //get Authkey TPM2_object loaded externally && compute name from the TPM object  (TPM2B_PUBLIC) generated 
+            String Auth_key_name = tpm.computePubKeyName(tpm.load_external(modulus_key));
+
+            //compute Policyauthorized
+            TPM_policies policies = new TPM_policies();
+            
+            if (policies.Policyauthorized_creation(Auth_key_name) == null) {
+                return new Response<String>(Response.STATUS_ERROR, "Error calculating the Policyauthorized policy digest");
+            }
+
+           // String SeK_certificate = "";
+            return new Response<String>(Response.STATUS_OK, null, Hex.toHexString(policies.Last_policy));
     
         } catch (Exception e) {
         return new Response<String>(Response.STATUS_ERROR, e.toString());
@@ -543,8 +587,11 @@ public class CoreService {
             }
 
             TPMEngine tpm = new TPMEngine();
-            if (tpm.import_publickey_pcr(user.getAkPub(), sha1Bank, sha256Bank, pcrs) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad public key or pcr values format");
+            if (tpm.import_publickey(user.getAkPub()) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "bad public key");
+            }
+            if (tpm.import_pcr(sha1Bank, sha256Bank, pcrs) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "bad pcr values format");
             }
             
             if (tpm.import_qualification(user.getQualification()) != true) {
@@ -575,9 +622,9 @@ public class CoreService {
             /**a
              * Check signature
              * It is important to know if the fail was becasue the signature or the quote to delete the qualification when the signature is verifyied
-             *
+             * ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature
              */
-            if (tpm.verify_signature() != true) {
+            if (tpm.verify_signature(tpm.quote.quoted.toTpm(),  tpm.quote.signature) != true) {
                 try {
                     resp.setOutcome("Error in signature");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
