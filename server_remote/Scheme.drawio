@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2021-10-07T15:00:46.092Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36" etag="jReRz55aVZE_FUr3SDi5" version="15.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-07T15:16:34.281Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.61 Safari/537.36" etag="m8RrrGL9N5oivE4cREIM" version="15.4.0" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
-    <mxGraphModel dx="2031" dy="1260" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="1185" dy="735" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -53,9 +53,9 @@
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="4jZaXwiLPurZE2urW2g0-64" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Create unsigned CSR&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4jZaXwiLPurZE2urW2g0-63">
+        <mxCell id="4jZaXwiLPurZE2urW2g0-64" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Create unsigned CSR&lt;br&gt;This step can be avoided&amp;nbsp;&lt;br&gt;if we use the CSR recieved&lt;br&gt;in the eend of KCV&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4jZaXwiLPurZE2urW2g0-63">
           <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
-            <mxPoint x="77" y="8" as="offset" />
+            <mxPoint x="87" y="27" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="4jZaXwiLPurZE2urW2g0-66" value="" style="group;fontStyle=1;fontSize=13;" vertex="1" connectable="0" parent="3nuBFxr9cyL0pnOWT2aG-1">
@@ -116,21 +116,7 @@
         <mxCell id="PK25MbMjysthuU5o7wJD-3" value="Attestor" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
           <mxGeometry x="560" y="80" width="120" height="1720" as="geometry" />
         </mxCell>
-        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-3" value="Send certificate  (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="PK25MbMjysthuU5o7wJD-3" edge="1">
-          <mxGeometry x="-0.04" relative="1" as="geometry">
-            <mxPoint x="60" y="1058.57" as="targetPoint" />
-            <mxPoint x="380" y="1058.57" as="sourcePoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-2" value="Send Sealedkey_PuBK" style="verticalAlign=bottom;endArrow=block;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="PK25MbMjysthuU5o7wJD-3" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <mxPoint x="60" y="1018.57" as="sourcePoint" />
-            <mxPoint x="380" y="1018.57" as="targetPoint" />
-            <mxPoint as="offset" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-4" value="Send certificate (CA-&gt;SealedKey)" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="PK25MbMjysthuU5o7wJD-3" edge="1">
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-4" value="Unsigned CSR digest" style="verticalAlign=bottom;endArrow=block;endSize=6;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;endFill=1;" parent="PK25MbMjysthuU5o7wJD-3" edge="1">
           <mxGeometry x="-0.04" relative="1" as="geometry">
             <mxPoint x="-180" y="1058.57" as="targetPoint" />
             <mxPoint x="70" y="1058.57" as="sourcePoint" />
@@ -157,6 +143,21 @@
         <mxCell id="4jZaXwiLPurZE2urW2g0-74" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate CSR:&lt;br&gt;Correct data,&lt;br&gt;correct public key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4jZaXwiLPurZE2urW2g0-73">
           <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
             <mxPoint x="67" y="22" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4jZaXwiLPurZE2urW2g0-79" value="" style="curved=1;endArrow=classic;html=1;" edge="1" parent="PK25MbMjysthuU5o7wJD-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="60.00352941176516" y="980" as="sourcePoint" />
+            <mxPoint x="60.00352941176516" y="1035.9999999999995" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="110.68000000000006" y="980" />
+              <mxPoint x="110.68000000000006" y="1036" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="4jZaXwiLPurZE2urW2g0-80" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Generate unsigned CSR digest&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="4jZaXwiLPurZE2urW2g0-79">
+          <mxGeometry x="-0.3591" y="-8" relative="1" as="geometry">
+            <mxPoint x="127" y="25" as="offset" />
           </mxGeometry>
         </mxCell>
         <mxCell id="PK25MbMjysthuU5o7wJD-15" value="READ" style="verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" edge="1">
