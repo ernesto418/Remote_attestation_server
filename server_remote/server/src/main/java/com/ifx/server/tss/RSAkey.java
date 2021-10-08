@@ -117,7 +117,8 @@ public class RSAkey {
      * @return success or fail
      */
     public String sign_resetsession(int resetcount) throws Exception {
-        byte[] policy_session=Policyreset_creation(resetcount); 
+        TPM_policies policies = new TPM_policies();
+        byte[] policy_session=policies.Policyreset_creation(resetcount); 
         return sign_byte(policy_session,this.pair.getPrivate());
      }
     	
@@ -222,6 +223,7 @@ public class RSAkey {
     
 
     /**
+     * //to be eliminated from this section, by ernesto
      * Create the hash of a policy "TPM2_PolicyCounterTimer" where the reset value of th TPM MUST be
      * the value of resetcount to be satisfied. For more infomation about the policy go to:
      * https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part3_Commands_code_pub.pdf

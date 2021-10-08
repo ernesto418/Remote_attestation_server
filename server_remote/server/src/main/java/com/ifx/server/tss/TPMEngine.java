@@ -46,8 +46,9 @@ public class TPMEngine {
     public PCR_ReadResponse pcrs;
     public byte[] qualification;
     public TPMT_PUBLIC trustedPK;
+    public TPMT_PUBLIC sealedKey;
     public QuoteResponse quote;
-    public byte[] AttestationCertificate;
+    public TPMS_ATTEST AttestationCertificate;
 
     public TPMEngine() {
     }
@@ -97,7 +98,28 @@ public class TPMEngine {
         }
     }
 
+    /**
+     * Construct TPMT_PUBLIC
+     * Supports asymmetric cryptography key TPMS_SIG_SCHEME_RSASSA (SHA256) only
+     * @param pubKey
+     * @return success or fail
+     */
+    public boolean import_sealedkey(String pubKey) {
+        try {
+            /**
+             * Generate TPMT_PUBLIC
+             */
+            byte[] bArray = hexStringToByteArray(pubKey);
+            InByteBuf inBuf = new InByteBuf(bArray);
+            inBuf.readInt(2); // skip length of payload
+            sealedKey = new TPMT_PUBLIC();
+            sealedKey.initFromTpm(inBuf);
 
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
     /**
      * Construct PCR_ReadResponse
      * Supports asymmetric cryptography key TPMS_SIG_SCHEME_RSASSA (SHA256) only
@@ -173,25 +195,23 @@ public class TPMEngine {
              * Generate TPMT_PUBLIC
              */
             String message_string = message;
-            byte[] AttestationCertificate_ = hexStringToByteArray(message_string);
+            byte[] AttestationCertificate_byte = hexStringToByteArray(message_string);
+            InByteBuf certificate_buf =  new InByteBuf(AttestationCertificate_byte);
 
+            TPMS_ATTEST certificate_tpm_ = new TPMS_ATTEST();
+            certificate_tpm_.initFromTpm(certificate_buf);
             	
             // TPM generated?
-            byte[] equal_= Arrays.copyOfRange(AttestationCertificate_, 0, 3);
-            byte[] Magicnumber = {(byte)0xff,(byte)0x54,(byte)0x43,(byte)0x47};
-            if(!Arrays.equals(equal_, Magicnumber)){
+            if(!(certificate_tpm_.magic.name()=="VALUE")){
                 return false;
             };
 
             // TPM attest certificate? (TPM_ST_ATTEST_CERTIFY)
-            equal_= Arrays.copyOfRange(AttestationCertificate_, 4, 5);
-            byte[] TPM_ST_ATTEST_CERTIFY = {(byte)0x80,(byte)0x17};
-            // TPM generated?
-            if(!Arrays.equals(equal_, TPM_ST_ATTEST_CERTIFY)){
+            if(!(certificate_tpm_.GetUnionSelector_attested()==0x8017)){
                 return false;
             };
-
-            AttestationCertificate = AttestationCertificate_;
+            AttestationCertificate = new TPMS_ATTEST(); 
+            AttestationCertificate.initFromTpm(certificate_buf);
 
             return true;
         } catch (Exception e) {
@@ -514,7 +534,7 @@ public class TPMEngine {
      * @param pubKey
      * @return
      */
-    public static boolean assert_attributes(String pubKey) {
+    public static boolean assert_AKattributes(String pubKey) {
         byte[] bArray = hexStringToByteArray(pubKey);
         InByteBuf inBuf = new InByteBuf(bArray);
         inBuf.readInt(2); // skip length of payload
@@ -533,6 +553,26 @@ public class TPMEngine {
         }
         return false;
     }
+
+            /**
+     * Assert the correct attributes of the Attestation Key (AK)
+     * TPM2 tool repository generate AK with the next attributes:
+     * @attributes fixedTPM , fixedParent , sensitiveDataOrigin , userWithAuth , encrypt 
+     * @param pubKey
+     * @return
+     */
+    public static boolean assert_SeKattributes(TPMT_PUBLIC sealedKey) {
+
+        if(sealedKey.objectAttributes.hasAttr(TPMA_OBJECT.fixedTPM)) {
+            if(sealedKey.objectAttributes.hasAttr(TPMA_OBJECT.sensitiveDataOrigin)) {
+                            return true;
+
+            }
+        }
+        return false;
+    }
+
+
     /**
      * Calculate TPM key's Name according to TPM standard
      * A key's Name is a digest of its public data
@@ -547,7 +587,16 @@ public class TPMEngine {
         pk.initFromTpm(inBuf);
         return byteArrayToHexString(pk.getName());
     }
-
+    
+    /**
+     * Extract the name of the key validated in the certificate got with TPM2_certificate
+     * @param certificate
+     * @return name
+     */
+    public static String computePubKeyName(TPMS_ATTEST certificate) {
+        String  name_ = byteArrayToHexString(((TPMS_CERTIFY_INFO)certificate.attested).name);
+        return name_;
+    }
     /**
      * Convert 3 bytes of PCR selection bitmap to index array
      * x00   x00    x00

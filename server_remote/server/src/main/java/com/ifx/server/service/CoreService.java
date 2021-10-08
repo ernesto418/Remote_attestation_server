@@ -36,6 +36,7 @@ import com.ifx.server.tss.RSAkey;
 import com.ifx.server.tss.TPM_policies;
 import com.ifx.server.tss.AESengine;
 import org.bouncycastle.util.encoders.Hex;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
@@ -225,7 +226,7 @@ public class CoreService {
             }
 
             //Asserting attributes of Attestation Key
-            if (!TPMEngine.assert_attributes(attune.getAkPub())) {
+            if (!TPMEngine.assert_AKattributes(attune.getAkPub())) {
                 return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "Wrong attributes of the \"Attestation Key\"",null);
             }
 
@@ -421,8 +422,22 @@ public class CoreService {
                 return new Response<String>(Response.STATUS_ERROR, "invalid username", null);
             }
 
-
+            /**
+             * We will start the validation of all the coming information:
+             * 1. SeKcertificate is a certificate TPM_generated and TPM_ST_ATTEST_CERTIFY
+             * 2. SeKcertificate is signed by AK
+             * 3. SeKcertificate is validating SeK
+             * 4. SeK has the correct policy
+             * 5. SeK has the correct attributes
+             */
             TPMEngine tpm = new TPMEngine();
+
+            /**
+             * Import Attestation Key (already validated in attune)
+             */
+            if (tpm.import_sealedkey(user.getSeKPub()) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "Sealed key corrupted");
+            }
 
             /**
              * Import Attestation Key (already validated in attune)
@@ -434,6 +449,7 @@ public class CoreService {
 
             /**
              * Import Attestation Certificate
+             * Also check: TPM_generated and TPM_ST_ATTEST_CERTIFY
              */
             if (tpm.import_AttestationCertificate(KCV.getSeKcert()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "Bad certificate, use TPM2_certify");
@@ -441,15 +457,24 @@ public class CoreService {
 
 
             /**
-             * Validate authenticity of Attestation Certificate
+             * Verify authenticity of Attestation Certificate
              */
-            if (tpm.verify_signature(tpm.AttestationCertificate,KCV.getcertSig()) != true) {
+            if (tpm.verify_signature(tpm.AttestationCertificate.toTpm(),KCV.getcertSig()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "Signature not valid, remember using the same AK used in Attune to sign the certificate");
             }
 
             /**
-             * The Certificate is rightful, now we have to valdiate the content, for that, we will recreate the desired policy of our key
-             * It can only be done with the knowledge of AuthPuk
+             * The Certificate is rightful, now we will read it to assert that the key that is comming in KCV (SeK) is
+             * the same that in included in the rightful certificate
+             */ 
+            if ((TPMEngine.computePubKeyName(KCV.getSeKPub())) == TPMEngine.computePubKeyName(tpm.AttestationCertificate)!= true  ) {
+                return new Response<String>(Response.STATUS_ERROR, "SeK certificate and SeK name do not correspond");
+            }
+
+            /**
+             * Now we know that SeK is a key that is loaded in the TPM, it is the moment to check the policy and the attributes of SeK
+             * 
+             * First step is to generate the Authorized policy in software and compare it with the policy of SeK
              */
             //get Authkey modulus
             String modulus_key = RSAkey.getModulus(user.getPuB_PEM());
@@ -460,14 +485,33 @@ public class CoreService {
             //get Authkey TPM2_object loaded externally && compute name from the TPM object  (TPM2B_PUBLIC) generated 
             String Auth_key_name = tpm.computePubKeyName(tpm.load_external(modulus_key));
 
-            //compute Policyauthorized
-            TPM_policies policies = new TPM_policies();
-            
+            //Compute Policyauthorized
+            TPM_policies policies = new TPM_policies();            
             if (policies.Policyauthorized_creation(Auth_key_name) == null) {
                 return new Response<String>(Response.STATUS_ERROR, "Error calculating the Policyauthorized policy digest");
             }
 
-           // String SeK_certificate = "";
+            //Compare policies
+            if (Arrays.equals(tpm.sealedKey.authPolicy, policies.Last_policy)!= true) {
+                return new Response<String>(Response.STATUS_ERROR, "Sealed key's polciy is not correct");
+            }
+
+            //assert SeK attributes
+            if (assert_SeKattributes(tpm.sealedKey)!= true) {
+                return new Response<String>(Response.STATUS_ERROR, "Sealed key's polciy is not correct");
+            }
+
+            user.setsekPub(user.getSeKPub());
+            userRepository.save(user);
+
+            /**
+            * It would be all from KCV process, but we will also provide with the unsigned CSR, to avoid the necesity ofcreate it from the IoT device
+            */ 
+
+            /**
+            * All the information is correct, therefore, we can ask to our CA to sing a certificate
+            */ 
+
             return new Response<String>(Response.STATUS_OK, null, Hex.toHexString(policies.Last_policy));
     
         } catch (Exception e) {
