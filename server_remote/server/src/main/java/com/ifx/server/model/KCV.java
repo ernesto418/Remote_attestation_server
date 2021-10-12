@@ -33,7 +33,7 @@ public class KCV {
     private final String type = "KCV";
     
     private String username;
-    private String SeKcert;
-    private String certSig;
-    private String SeKPub;
+    private String seKcert;
+    private String certsig;
+    private String seKPub;
 }

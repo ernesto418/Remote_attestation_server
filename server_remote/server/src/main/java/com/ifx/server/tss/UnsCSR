@@ -1,0 +1,43 @@
+package com.ifx.server.tss;
+
+import java.io.IOException;
+import java.security.PublicKey;
+
+import org.bouncycastle.asn1.ASN1Encoding;
+import org.bouncycastle.asn1.DERBitString;
+import org.bouncycastle.asn1.DERSet;
+import org.bouncycastle.asn1.pkcs.CertificationRequest;
+import org.bouncycastle.asn1.pkcs.CertificationRequestInfo;
+import org.bouncycastle.asn1.x500.X500Name;
+import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
+import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.operator.ContentVerifierProvider;
+import org.bouncycastle.operator.DefaultSignatureAlgorithmIdentifierFinder;
+import org.bouncycastle.operator.OperatorCreationException;
+import org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder;
+import org.bouncycastle.pkcs.PKCS10CertificationRequest;
+import org.bouncycastle.pkcs.PKCSException;
+
+public class UnsCSR {
+    public UnsCSR(PublicKey pub, byte[] signedData) throws OperatorCreationException, IOException, PKCSException{
+    
+    X500Name x500 = new X500Name("CN=test");
+    CertificationRequestInfo  info = new CertificationRequestInfo(
+			    		x500,  SubjectPublicKeyInfo.getInstance(pub.getEncoded()),new DERSet());
+    byte dataToSign[] = info.getEncoded(ASN1Encoding.DER);
+    AlgorithmIdentifier sigAlgId = new DefaultSignatureAlgorithmIdentifierFinder().find("ECDSA");
+    PKCS10CertificationRequest csr = new PKCS10CertificationRequest(
+            new CertificationRequest(
+                info,
+                sigAlgId, 
+                new DERBitString(signedData)
+            )
+        );
+    byte[] signedCSR = csr.getEncoded();
+    //Verify signature validity
+    ContentVerifierProvider verifier = new JcaContentVerifierProviderBuilder().setProvider(new BouncyCastleProvider()).build(pub);
+    boolean valid = csr.isSignatureValid(verifier);
+
+    };
+}

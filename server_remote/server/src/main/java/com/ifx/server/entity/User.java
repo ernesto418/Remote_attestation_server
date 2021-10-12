@@ -68,7 +68,7 @@ public class User {
     @Column(length = 200000)
     private String measureList;
     @Column(length = 600)
-    private String sekPub;
+    private String seKPub;
 
     @Transient
     private String passwordConfirm;

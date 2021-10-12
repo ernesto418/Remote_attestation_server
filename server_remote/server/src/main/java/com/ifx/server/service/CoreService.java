@@ -221,8 +221,11 @@ public class CoreService {
             */
             
             //Loading AK just to check the correctness of AK (better geting the problem here and not at the end of the process)
-            if (TPMEngine.import_publickey(attune.getAkPub()) != true) { //Maybe can be error using a crontructor in a class not initialized
+            {
+                TPMEngine tpm = new TPMEngine();
+            if (tpm.import_publickey(attune.getAkPub()) != true) { //Maybe can be error using a crontructor in a class not initialized
                 return new Response<AttuneRespDevice>(Response.STATUS_ERROR, "Bad Attestation key, please, regenerate using TPMS_SIG_SCHEME_RSASSA (SHA256)",null);
+            }
             }
 
             //Asserting attributes of Attestation Key
@@ -371,11 +374,7 @@ public class CoreService {
             if (user.getEkPub() != null && user.getAkName() != null &&
                     user.getEkPub() != "" && user.getAkName() != "") {
                         
-                        //for debug porpuses
-                        System.out.print("\n EkPub " + user.getEkPub());
-                        System.out.print("\n AkName " +user.getAkName());
-                        System.out.print("\n Public_string " + Public_pem);
-                        //
+
 
 
                         //Encrypting Auth_PuK
@@ -383,7 +382,6 @@ public class CoreService {
 
                         // Encrypted qualification
                         AESkey_credential = TPMEngine.makeCredential(user.getEkPub(), user.getAkName(), AESengine.key);
-                        System.out.print("\n PuK_credential " + AESkey_credential);
             } else {
                 // qualification in plain
                 //atelicResp.setQualification(qualification);
@@ -433,9 +431,9 @@ public class CoreService {
             TPMEngine tpm = new TPMEngine();
 
             /**
-             * Import Attestation Key (already validated in attune)
+             * Import Sealed key
              */
-            if (tpm.import_sealedkey(user.getSeKPub()) != true) {
+            if (tpm.import_sealedkey(KCV.getSeKPub()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "Sealed key corrupted");
             }
 
@@ -459,7 +457,7 @@ public class CoreService {
             /**
              * Verify authenticity of Attestation Certificate
              */
-            if (tpm.verify_signature(tpm.AttestationCertificate.toTpm(),KCV.getcertSig()) != true) {
+            if (tpm.verify_signature(tpm.AttestationCertificate.toTpm(),KCV.getCertsig()) != true) {
                 return new Response<String>(Response.STATUS_ERROR, "Signature not valid, remember using the same AK used in Attune to sign the certificate");
             }
 
@@ -467,7 +465,7 @@ public class CoreService {
              * The Certificate is rightful, now we will read it to assert that the key that is comming in KCV (SeK) is
              * the same that in included in the rightful certificate
              */ 
-            if ((TPMEngine.computePubKeyName(KCV.getSeKPub())) == TPMEngine.computePubKeyName(tpm.AttestationCertificate)!= true  ) {
+            if (  (TPMEngine.computePubKeyName(KCV.getSeKPub()).equals(TPMEngine.computePubKeyName(tpm.AttestationCertificate))) != true ) {
                 return new Response<String>(Response.STATUS_ERROR, "SeK certificate and SeK name do not correspond");
             }
 
@@ -482,6 +480,7 @@ public class CoreService {
                 return new Response<String>(Response.STATUS_ERROR, "Bad Authkey, please, repeat Attune process");
             }
 
+
             //get Authkey TPM2_object loaded externally && compute name from the TPM object  (TPM2B_PUBLIC) generated 
             String Auth_key_name = tpm.computePubKeyName(tpm.load_external(modulus_key));
 
@@ -493,19 +492,19 @@ public class CoreService {
 
             //Compare policies
             if (Arrays.equals(tpm.sealedKey.authPolicy, policies.Last_policy)!= true) {
-                return new Response<String>(Response.STATUS_ERROR, "Sealed key's polciy is not correct");
+                return new Response<String>(Response.STATUS_ERROR, "Sealed key's policy is not correct");
             }
 
             //assert SeK attributes
             if (assert_SeKattributes(tpm.sealedKey)!= true) {
-                return new Response<String>(Response.STATUS_ERROR, "Sealed key's polciy is not correct");
+                return new Response<String>(Response.STATUS_ERROR, "Sealed key's attributes are not correct");
             }
 
-            user.setsekPub(user.getSeKPub());
+            user.setSeKPub(KCV.getSeKPub());
             userRepository.save(user);
 
             /**
-            * It would be all from KCV process, but we will also provide with the unsigned CSR, to avoid the necesity ofcreate it from the IoT device
+            * It would be all from KCV process, but we will also provide with the unsigned CSR, to avoid the necesity of create it from the IoT device
             */ 
 
             /**

@@ -194,6 +194,7 @@ public class TPMEngine {
             /**
              * Generate TPMT_PUBLIC
              */
+            
             String message_string = message;
             byte[] AttestationCertificate_byte = hexStringToByteArray(message_string);
             InByteBuf certificate_buf =  new InByteBuf(AttestationCertificate_byte);
@@ -205,13 +206,16 @@ public class TPMEngine {
             if(!(certificate_tpm_.magic.name()=="VALUE")){
                 return false;
             };
-
+            
             // TPM attest certificate? (TPM_ST_ATTEST_CERTIFY)
             if(!(certificate_tpm_.GetUnionSelector_attested()==0x8017)){
+                
                 return false;
             };
-            AttestationCertificate = new TPMS_ATTEST(); 
-            AttestationCertificate.initFromTpm(certificate_buf);
+            
+            certificate_buf =  new InByteBuf(AttestationCertificate_byte);
+            this.AttestationCertificate = new TPMS_ATTEST(); 
+            this.AttestationCertificate.initFromTpm(certificate_buf);
 
             return true;
         } catch (Exception e) {
@@ -585,6 +589,7 @@ public class TPMEngine {
         inBuf.readInt(2); // skip length of payload
         TPMT_PUBLIC pk = new TPMT_PUBLIC();
         pk.initFromTpm(inBuf);
+
         return byteArrayToHexString(pk.getName());
     }
     
@@ -595,6 +600,7 @@ public class TPMEngine {
      */
     public static String computePubKeyName(TPMS_ATTEST certificate) {
         String  name_ = byteArrayToHexString(((TPMS_CERTIFY_INFO)certificate.attested).name);
+
         return name_;
     }
     /**
@@ -663,7 +669,11 @@ public class TPMEngine {
         * RSA TPM2 header (kind of object, null policy, attributes, kind of key etc)
         */
         String header ="0001000b000600400000001000100800000100010100";
-        String TPMkey_string = header + modulus;
+        /*
+        * 2 byte offset
+        */
+        String offset = "ffff";
+        String TPMkey_string = offset + header + modulus;
 
         return TPMkey_string;
     }

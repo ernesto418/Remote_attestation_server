@@ -188,8 +188,14 @@ public class RSAkey {
      * @return String Modulus in hexString
      */
     
-    public String getModulus(String Public) {
+    public static String getModulus(String Public) {
     	try {
+            /* public key */
+            Public = Public.replace("-----BEGIN PUBLIC KEY-----", "");
+            Public = Public.replace("-----END PUBLIC KEY-----", "");
+            Public = Public.replace("\n", "");
+            Public = Public.replace("\r", "");
+
             
             KeyFactory kf = KeyFactory.getInstance("RSA");
             byte[] keyBytes = Base64.getDecoder().decode(Public.getBytes("UTF-8"));
@@ -198,8 +204,9 @@ public class RSAkey {
             RSAPublicKey rsaPub  = (RSAPublicKey)(fileGeneratedPublicKey);
             BigInteger publicKeyModulus = rsaPub.getModulus();
             String Modulus=byteArrayToHexString(publicKeyModulus.toByteArray());
-            //debug purposes
-            System.out.println("publicKeyModulus: " + publicKeyModulus);
+            Modulus = Modulus.substring(2);
+
+
     	    
             return Modulus;
         } catch (Exception e) {

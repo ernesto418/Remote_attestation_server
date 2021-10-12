@@ -71,13 +71,15 @@ public class TPM_policies {
             byte[] Policyauthorize =  hexStringToByteArray("0000016a");
             
             // Oldpolicy | command | keySign
-            byte[] Policy_contruction =new byte[68];
+            byte[] Policy_contruction =new byte[this.Last_policy.length + Policyauthorize.length + key_name.length];
             System.arraycopy(this.Last_policy , 0, Policy_contruction,                  0, this.Last_policy.length);
             System.arraycopy(Policyauthorize, 0, Policy_contruction, this.Last_policy.length, Policyauthorize.length); 
             System.arraycopy(key_name       , 0, Policy_contruction, this.Last_policy.length + Policyauthorize.length, key_name.length);
+            
             this.Last_policy = digest.digest(Policy_contruction);
             //Two times hashing for this policy
             this.Last_policy = digest.digest(this.Last_policy);
+            
             return this.Last_policy;
         } catch (Exception e) {
             return null;
