@@ -35,6 +35,7 @@ import com.ifx.server.tss.TPMEngine;
 import com.ifx.server.tss.RSAkey;
 import com.ifx.server.tss.TPM_policies;
 import com.ifx.server.tss.AESengine;
+import com.ifx.server.tss.UnsCSR;
 import org.bouncycastle.util.encoders.Hex;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -507,11 +508,14 @@ public class CoreService {
             * It would be all from KCV process, but we will also provide with the unsigned CSR, to avoid the necesity of create it from the IoT device
             */ 
 
+            byte[] xy = TPMEngine.fromTPM2byte(tpm.sealedKey);
+            String uncsr = UnsCSR.getunscsr(UnsCSR.fromByte2PublicKey(xy));
+            
             /**
             * All the information is correct, therefore, we can ask to our CA to sing a certificate
             */ 
-
-            return new Response<String>(Response.STATUS_OK, null, Hex.toHexString(policies.Last_policy));
+            //String unscsr  = UnsCSR.getunscsr(pub_pem);
+            return new Response<String>(Response.STATUS_OK, null, uncsr);
     
         } catch (Exception e) {
         return new Response<String>(Response.STATUS_ERROR, e.toString());

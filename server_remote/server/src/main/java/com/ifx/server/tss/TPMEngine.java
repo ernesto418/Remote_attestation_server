@@ -648,6 +648,22 @@ public class TPMEngine {
     }
 
     /**
+     * Extract X Y values from ecc  key in TPM format
+     * @param TPMT_PUBLIC
+     * @return byte[]
+     */
+    public static byte[] fromTPM2byte(TPMT_PUBLIC ECCk){
+        TPMS_ECC_POINT parameters = (TPMS_ECC_POINT) ECCk.unique;
+        byte[] x = parameters.x;
+        byte[] y = parameters.y;
+        byte[] xy = new byte [x.length + y.length ];
+        System.arraycopy(x, 0, xy, 0, x.length);
+        System.arraycopy(y, 0, xy, x.length, y.length);
+
+        return xy;
+    }
+
+    /**
      * Convert string to string array
      * "[a, b, c]" -> {"a", "b", "c"}
      * @param string
