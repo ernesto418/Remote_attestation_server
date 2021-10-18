@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2021-10-18T08:24:37.884Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="oQA9TUqbNQoVLQ0PRtjg" version="15.5.3" type="github">
+<mxfile host="app.diagrams.net" modified="2021-10-18T08:36:30.486Z" agent="5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/94.0.4606.81 Safari/537.36" etag="xiICrIRG9GD_UvsMrS2V" version="15.5.3" type="github">
   <diagram id="kgpKYQtTHZ0yAKxKKP6v" name="Page-1">
     <mxGraphModel dx="1662" dy="882" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -394,9 +394,6 @@
         <mxCell id="-7gtEHVr5MvBsyLJ3Pri-20" value="Daily life functionality" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1;fontSize=13;" parent="-7gtEHVr5MvBsyLJ3Pri-18" vertex="1">
           <mxGeometry y="69.82758620689656" width="45.71428571428571" height="10.344827586206899" as="geometry" />
         </mxCell>
-        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-27" value="Device stakeholder" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="x-Ay-M83Ov1TleOutt_n-48" vertex="1">
-          <mxGeometry x="220" y="1260" width="120" height="340" as="geometry" />
-        </mxCell>
         <mxCell id="LwqqrGVOomV46JIBTcHT-10" value="&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;Validate certificate:&lt;br&gt;It starts with magic number&amp;nbsp;&lt;/b&gt;&lt;/span&gt;0xff544347&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;it is a attest certificate&amp;nbsp;&lt;/b&gt;&lt;/span&gt;0x8017&lt;span style=&quot;font-size: 13px&quot;&gt;&lt;b&gt;&lt;br&gt;Signed by attestation key&lt;br&gt;&lt;/b&gt;&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" parent="x-Ay-M83Ov1TleOutt_n-48" vertex="1" connectable="0">
           <mxGeometry x="240.00352941176516" y="859.83" as="geometry" />
         </mxCell>
@@ -546,6 +543,9 @@
             <mxPoint x="618.75" y="1420" as="targetPoint" />
             <mxPoint as="offset" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="-7gtEHVr5MvBsyLJ3Pri-27" value="Device stakeholder" style="shape=umlLifeline;perimeter=lifelinePerimeter;container=1;collapsible=0;recursiveResize=0;rounded=0;shadow=0;strokeWidth=1;fontStyle=1;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="1100" y="1470" width="120" height="340" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
