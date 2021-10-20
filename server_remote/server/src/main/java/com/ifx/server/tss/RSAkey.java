@@ -112,9 +112,11 @@ public class RSAkey {
 
 
     /**
+     * 
      * Create an enabler authorization to use the sealed key for the given Reset value
      * @param resetcount Reset value of the TPM
      * @return success or fail
+     * @deprecated use sign_byte(TPM_policies.Policyreset_creation(resetcount),this.pair.getPrivate());
      */
     public String sign_resetsession(int resetcount) throws Exception {
         TPM_policies policies = new TPM_policies();
@@ -227,7 +229,22 @@ public class RSAkey {
 
         return Base64.getEncoder().encodeToString(signature);
     }
-    
+    /**
+     * Sing a given byte array using the given privatekey
+     * 
+     * @param msg byte[] Message to be signed
+     * @param privateKey PrivateKey Private key to sign  msg
+     * @return String array signature
+     */
+    public static String sign_byte(byte[] msg,PrivateKey privateKey) throws Exception { 
+        Signature privateSignature = Signature.getInstance("SHA256withRSA");
+        privateSignature.initSign(privateKey);
+        privateSignature.update(msg);
+
+        byte[] signature = privateSignature.sign();
+
+        return Base64.getEncoder().encodeToString(signature);
+    }
 
     /**
      * //to be eliminated from this section, by ernesto
@@ -269,22 +286,7 @@ public class RSAkey {
     	return Hash_policyreset;
     }
 
-    /**
-     * Sing a given byte array using the given privatekey
-     * 
-     * @param msg byte[] Message to be signed
-     * @param privateKey PrivateKey Private key to sign  msg
-     * @return String array signature
-     */
-    private static String sign_byte(byte[] msg,PrivateKey privateKey) throws Exception { //by ernesto, to be changed with bouncy castle fucntion
-        Signature privateSignature = Signature.getInstance("SHA256withRSA");
-        privateSignature.initSign(privateKey);
-        privateSignature.update(msg);
 
-        byte[] signature = privateSignature.sign();
-
-        return Base64.getEncoder().encodeToString(signature);
-    }
 
     private static byte[] hexStringToByteArray(String s) {
         int len = s.length();

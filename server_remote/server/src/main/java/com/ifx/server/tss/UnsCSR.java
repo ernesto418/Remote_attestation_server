@@ -1,32 +1,49 @@
 package com.ifx.server.tss;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.math.BigInteger;
 import java.util.Base64;
+import java.util.Date;
 import java.security.*;
+
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
 
 import org.bouncycastle.asn1.ASN1Encoding;
 import org.bouncycastle.asn1.DERBitString;
 import org.bouncycastle.asn1.DERSet;
+import org.bouncycastle.cert.*;
+import org.bouncycastle.crypto.params.AsymmetricKeyParameter;
+import org.bouncycastle.crypto.util.PrivateKeyFactory;
+
+import java.security.cert.CertificateException;
+import java.security.cert.CertificateFactory;
+import java.security.cert.X509Certificate;
 import org.bouncycastle.asn1.pkcs.CertificationRequest;
 import org.bouncycastle.asn1.pkcs.CertificationRequestInfo;
 import org.bouncycastle.asn1.x500.X500Name;
 import org.bouncycastle.asn1.x509.AlgorithmIdentifier;
 import org.bouncycastle.asn1.x509.SubjectPublicKeyInfo;
+import org.bouncycastle.asn1.x509.*;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.operator.ContentSigner;
 import org.bouncycastle.operator.ContentVerifierProvider;
+import org.bouncycastle.operator.DefaultDigestAlgorithmIdentifierFinder;
 import org.bouncycastle.operator.DefaultSignatureAlgorithmIdentifierFinder;
 import org.bouncycastle.operator.OperatorCreationException;
+import org.bouncycastle.operator.bc.BcRSAContentSignerBuilder;
 import org.bouncycastle.operator.jcajce.JcaContentVerifierProviderBuilder;
 import org.bouncycastle.pkcs.PKCS10CertificationRequest;
 import org.bouncycastle.pkcs.PKCSException;
 import org.bouncycastle.util.encoders.Hex;
+import org.bouncycastle.asn1.x509.Certificate;
 
 public class UnsCSR {
     public UnsCSR(){};
     
-    public static String getunscsr(PublicKey pub) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public static String getunscsr(PublicKey pub,String name) throws IOException, NoSuchAlgorithmException, InvalidKeySpecException {
         // KeyFactory kf = KeyFactory.getInstance("ECDSA");
         // pub_pem = pub_pem.replace("-----BEGIN PUBLIC KEY-----", "");
         // pub_pem = pub_pem.replace("-----END PUBLIC KEY-----", "");
@@ -35,14 +52,14 @@ public class UnsCSR {
         // byte[] Public_byte = Base64.getDecoder().decode(pub_pem);    		   
         // PublicKey pub = kf.generatePublic(new X509EncodedKeySpec(Public_byte));
 
-        X500Name x500 = new X500Name("CN=test");
+        X500Name x500 = new X500Name("CN=" + name + ",OU=SealedKey");
         CertificationRequestInfo  info = new CertificationRequestInfo(
                             x500,  SubjectPublicKeyInfo.getInstance(pub.getEncoded()),new DERSet());
         byte[] dataToSign = info.getEncoded(ASN1Encoding.DER);
             return byteArrayToHexString(dataToSign);
     }
 
-    public static String getcsr(PublicKey pub, String signedData_s) {
+    public static String getcsr(PublicKey pub, String signedData_s, String name) {
         try {
         // KeyFactory kf = KeyFactory.getInstance("ECDSA");
         // pub_pem = pub_pem.replace("-----BEGIN PUBLIC KEY-----", "");
@@ -53,10 +70,10 @@ public class UnsCSR {
         // PublicKey pub = kf.generatePublic(new X509EncodedKeySpec(Public_byte));
 
 
-        X500Name x500 = new X500Name("CN=test");
+        X500Name x500 = new X500Name("CN=" + name + ",OU=SealedKey");
         CertificationRequestInfo  info = new CertificationRequestInfo(
 			    		x500,  SubjectPublicKeyInfo.getInstance(pub.getEncoded()),new DERSet());
-        AlgorithmIdentifier sigAlgId = new DefaultSignatureAlgorithmIdentifierFinder().find("ECDSA");
+        AlgorithmIdentifier sigAlgId = new DefaultSignatureAlgorithmIdentifierFinder().find("SHA256WITHECDSA");
 
 
         byte[] signedData = hexStringToByteArray(signedData_s);
@@ -67,9 +84,7 @@ public class UnsCSR {
                     new DERBitString(signedData)
                 )
             );
-
             byte[] signedCSR = csr.getEncoded();
-
         //Verify signature validity
         ContentVerifierProvider verifier = new JcaContentVerifierProviderBuilder().setProvider(new BouncyCastleProvider()).build(pub);
         if(csr.isSignatureValid(verifier) != true){
@@ -96,6 +111,47 @@ public class UnsCSR {
             }
        };
 
+
+
+
+public static String sign(byte[] inputCSR, PrivateKey caPrivate, PublicKey publickey)
+        throws InvalidKeyException, NoSuchAlgorithmException,
+        NoSuchProviderException, SignatureException, IOException,
+        OperatorCreationException, CertificateException {   
+
+    AlgorithmIdentifier sigAlgId = new DefaultSignatureAlgorithmIdentifierFinder()
+            .find("SHA256withRSA");
+    AlgorithmIdentifier digAlgId = new DefaultDigestAlgorithmIdentifierFinder()
+            .find(sigAlgId);
+
+    AsymmetricKeyParameter foo = PrivateKeyFactory.createKey(caPrivate
+            .getEncoded());
+    SubjectPublicKeyInfo keyInfo = SubjectPublicKeyInfo.getInstance(publickey.getEncoded());
+
+
+    PKCS10CertificationRequest pk10Holder = new PKCS10CertificationRequest(inputCSR);
+
+    X509v3CertificateBuilder myCertificateGenerator = new X509v3CertificateBuilder(
+            new X500Name("CN=issuer"), new BigInteger("1"), new Date(
+                    System.currentTimeMillis()), new Date(
+                    System.currentTimeMillis() + 30 * 365 * 24 * 60 * 60
+                            * 1000), pk10Holder.getSubject(), keyInfo);
+
+    ContentSigner sigGen = new BcRSAContentSignerBuilder(sigAlgId, digAlgId)
+            .build(foo);        
+
+    X509CertificateHolder holder = myCertificateGenerator.build(sigGen);
+    Certificate eeX509CertificateStructure = holder.toASN1Structure(); 
+ 
+
+    CertificateFactory cf = CertificateFactory.getInstance("X.509", "BC");
+
+    // Read Certificate
+    InputStream is1 = new ByteArrayInputStream(eeX509CertificateStructure.getEncoded());
+    X509Certificate theCert = (X509Certificate) cf.generateCertificate(is1);
+    is1.close();
+    return byteArrayToHexString(theCert.getEncoded());
+}
 
 
     /***************************************************************

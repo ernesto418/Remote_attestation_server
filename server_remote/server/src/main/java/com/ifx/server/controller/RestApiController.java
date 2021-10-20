@@ -81,6 +81,12 @@ public class RestApiController {
     public Response<String> processKCV(@RequestBody KCV kcv) {
         return coreService.restKCV(kcv);
     }
+
+    @PostMapping("/csr")
+    public Response<String> processCSR(@RequestBody CSR csr) {
+        return coreService.restCSR(csr);
+    }
+
     @PostMapping("/atelic-sample")
     public Response<AtelicResp> processAtelicSample(@RequestBody Atelic atelic) {
         return coreService.restAtelicSample(atelic);

@@ -44,11 +44,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
-                    .csrf().ignoringAntMatchers("/attune", "/kcv","/atelic-sample", "/atelic", "/attest", "/ping")
+                    .csrf().ignoringAntMatchers("/attune", "/kcv","/csr","/atelic-sample", "/atelic", "/attest", "/ping")
                 .and()
                     .authorizeRequests()
                             .antMatchers("/", "/home", "/static/**", "/webjars/**", "/entry", "/signup", "/signin", "/ping",
-                                    "/error", "/atelic-sample", "/atelic", "/attune", "/kcv", "/attest").permitAll()
+                                    "/error", "/atelic-sample", "/atelic", "/attune", "/kcv", "/csr","/attest").permitAll()
                             .antMatchers("/dashboard", "/get-username", "/signout", "/websocket").hasRole("USER")
                             .anyRequest().authenticated()
                 .and()

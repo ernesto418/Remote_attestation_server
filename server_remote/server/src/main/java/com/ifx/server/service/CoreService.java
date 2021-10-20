@@ -492,6 +492,7 @@ public class CoreService {
             }
 
             //Compare policies
+            //By Ernesto: debug mode off
             if (Arrays.equals(tpm.sealedKey.authPolicy, policies.Last_policy)!= true) {
                 return new Response<String>(Response.STATUS_ERROR, "Sealed key's policy is not correct");
             }
@@ -509,7 +510,7 @@ public class CoreService {
             */ 
 
             byte[] xy = TPMEngine.fromTPM2byte(tpm.sealedKey);
-            String uncsr = UnsCSR.getunscsr(UnsCSR.fromByte2PublicKey(xy));
+            String uncsr = UnsCSR.getunscsr(UnsCSR.fromByte2PublicKey(xy),KCV.getUsername());
             
             /**
             * All the information is correct, therefore, we can ask to our CA to sing a certificate
@@ -523,6 +524,50 @@ public class CoreService {
     }
 
 
+    public Response<String> restCSR(@RequestBody CSR CSR) {
+        try {
+            User user = userRepository.findByUsername(CSR.getUsername());
+            //if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
+            if (user == null) {//Modification, we dont want the necessity of use the password to validate the RB-pi status
+                return new Response<String>(Response.STATUS_ERROR, "invalid username", null);
+            }
+            
+             /**
+             * We will start the CSR creation
+             * 1. Recreate Unsigned_CSR and Create CSR form signature and Unsigned_CSR
+             * 2. Send CSR to CA
+             * 4. SeK has the correct attributes
+             */
+
+            /**
+            * 1.
+            * Recreate Unsigned_CSR and Create CSR form signature and Unsigned_CSR
+            */ 
+
+            TPMEngine tpm = new TPMEngine();
+            if (tpm.import_sealedkey(user.getSeKPub()) != true) {
+                return new Response<String>(Response.STATUS_ERROR, "Sealed key corrupted");
+            }
+
+            byte[] xy = TPMEngine.fromTPM2byte(tpm.sealedKey);
+
+            String csr = UnsCSR.getcsr(UnsCSR.fromByte2PublicKey(xy),CSR.getSignature(),CSR.getUsername());
+
+            /**
+            * 2.
+            * Send CSR to CA (It is out of the scope of our proyect, we sign it by ourselft)
+            */ 
+            RSAkey Cakeys = new RSAkey();
+            Cakeys.generateKeyPair();
+
+            String X509certificate = UnsCSR.sign(Hex.decode(csr), Cakeys.pair.getPrivate(), UnsCSR.fromByte2PublicKey(xy));
+
+            return new Response<String>(Response.STATUS_OK, null, csr);
+
+    	} catch (Exception e) {
+        return new Response<String>(Response.STATUS_ERROR, e.toString());
+        }
+    }
 
     public Response<AtelicResp> restAtelicSample(@RequestBody Atelic atelic) {
         try {
@@ -711,8 +756,9 @@ public class CoreService {
                     if (resetCount == -1){
                         return new Response<String>(Response.STATUS_ERROR, "Invalid resetCount in quote (normally is becasue the quote has a bad format)");
                     }
+                    TPM_policies TPM_policies = new TPM_policies();
+                    String authorization_signature = RSAkey.sign_byte(TPM_policies.Policyreset_creation(resetCount),RSAk.pair.getPrivate());
 
-                    String authorization_signature = RSAk.sign_resetsession(resetCount);
                 try {
                     resp.setOutcome("Passed");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
