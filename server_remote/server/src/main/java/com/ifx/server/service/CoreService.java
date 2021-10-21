@@ -492,7 +492,6 @@ public class CoreService {
             }
 
             //Compare policies
-            //By Ernesto: debug mode off
             if (Arrays.equals(tpm.sealedKey.authPolicy, policies.Last_policy)!= true) {
                 return new Response<String>(Response.STATUS_ERROR, "Sealed key's policy is not correct");
             }
@@ -732,7 +731,7 @@ public class CoreService {
             user.setQualification(null);
             userRepository.save(user);
 
-            /**a
+            /**
              * Execute attestation, check quote and signature
              *
              * Send response to active clients via websocket"00""00"
@@ -749,7 +748,6 @@ public class CoreService {
                 }
                 return new Response<String>(Response.STATUS_ERROR, "Error in signature, platform measurement, or qualification data");
             } else {
-                    //by ernesto , Verifica si va aqui o fuera del try lo de la firma
                     RSAkey RSAk = new RSAkey();
                     RSAk.import_pair(user.getPiV_PEM(),user.getPuB_PEM());
                     int resetCount = tpm.getResetcount();
@@ -757,8 +755,11 @@ public class CoreService {
                         return new Response<String>(Response.STATUS_ERROR, "Invalid resetCount in quote (normally is becasue the quote has a bad format)");
                     }
                     TPM_policies TPM_policies = new TPM_policies();
-                    String authorization_signature = RSAkey.sign_byte(TPM_policies.Policyreset_creation(resetCount),RSAk.pair.getPrivate());
-
+                    TPM_policies.Policypcr_creation(Hex.decode(computedPcrSha256));
+                    System.out.println("Policy PCR: \n" + Hex.toHexString(TPM_policies.Last_policy));
+                    TPM_policies.Policyreset_creation(resetCount);
+                    System.out.println("Policy Reset: \n" + Hex.toHexString(TPM_policies.Last_policy));
+                    String authorization_signature = RSAk.sign_byte(TPM_policies.Last_policy);
                 try {
                     resp.setOutcome("Passed");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",

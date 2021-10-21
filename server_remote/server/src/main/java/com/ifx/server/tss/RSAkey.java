@@ -116,7 +116,7 @@ public class RSAkey {
      * Create an enabler authorization to use the sealed key for the given Reset value
      * @param resetcount Reset value of the TPM
      * @return success or fail
-     * @deprecated use sign_byte(TPM_policies.Policyreset_creation(resetcount),this.pair.getPrivate());
+     * @deprecated use sign_byte(TPM_policies.Policyreset_creation(resetcount));
      */
     public String sign_resetsession(int resetcount) throws Exception {
         TPM_policies policies = new TPM_policies();
@@ -245,45 +245,21 @@ public class RSAkey {
 
         return Base64.getEncoder().encodeToString(signature);
     }
-
     /**
-     * //to be eliminated from this section, by ernesto
-     * Create the hash of a policy "TPM2_PolicyCounterTimer" where the reset value of th TPM MUST be
-     * the value of resetcount to be satisfied. For more infomation about the policy go to:
-     * https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part3_Commands_code_pub.pdf
+     * Sing a given byte array using the given privatekey
      * 
-     * @param resetcount int TPM resetcount vlue
-     * @return byte array Policyreset
+     * @param msg byte[] Message to be signed
+     * @param privateKey PrivateKey Private key to sign  msg
+     * @return String array signature
      */
-    
-    private  static byte[] Policyreset_creation(int resetcount) throws Exception {
-    	//operandB configuration
-    	byte[] policy =  hexStringToByteArray("00100000");
-    	
-    	//operandB
-    	byte[] operandoB = ByteBuffer.allocate(4).putInt(resetcount).array();
-    	
-    	//Hash(operandB + Configuration)
-        byte[] fInput = new byte[8];
-        System.arraycopy(operandoB,0,fInput,0,4);
-        System.arraycopy(policy, 0, fInput, 4, 4);  
-    	MessageDigest digest = MessageDigest.getInstance("SHA-256");
-    	byte[] fHash = digest.digest(fInput);
-    	
-    	//input the digest of the last policy (here, no one)
-    	byte[] Last_policy = ByteBuffer.allocate(32).putInt(0).array();
-    	
-    	//Policy_countertimer name
-    	byte[] countertimer =  hexStringToByteArray("0000016d");
-    	
-    	//Last policy + countertimer name + Digest OperandB
-    	byte[] Policyreset =new byte[68];
-        System.arraycopy(Last_policy , 0, Policyreset,                  0, Last_policy.length);
-        System.arraycopy(countertimer, 0, Policyreset, Last_policy.length, countertimer.length); 
-        System.arraycopy(fHash       , 0, Policyreset, Last_policy.length + countertimer.length, fHash.length);
-        byte[] Hash_policyreset = digest.digest(Policyreset);
+    public String sign_byte(byte[] msg) throws Exception { 
+        Signature privateSignature = Signature.getInstance("SHA256withRSA");
+        privateSignature.initSign(this.pair.getPrivate());
+        privateSignature.update(msg);
 
-    	return Hash_policyreset;
+        byte[] signature = privateSignature.sign();
+
+        return Base64.getEncoder().encodeToString(signature);
     }
 
 

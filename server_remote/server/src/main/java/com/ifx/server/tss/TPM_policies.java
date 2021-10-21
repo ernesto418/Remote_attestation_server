@@ -86,6 +86,45 @@ public class TPM_policies {
         }
     }
 
+
+    /**
+     * Create the hash of a policy "TPM2_Policypcr". Warning: this function is prepared just to create
+     * the policy for PCR 10 and only PCR 10!!. For more infomation about the policy go to:
+     * https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part3_Commands_code_pub.pdf
+     * 
+     * @param PCR Bytes() TPM resetcount vlue
+     * @return byte array Policyreset
+     */
+    
+    public  byte[] Policypcr_creation(byte[] PCR10) throws Exception {
+
+    	MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+    	//PolicyPCSR name configuration
+    	byte[] policyPCR_name =  hexStringToByteArray("0000017F");
+
+    	//Selected PCR array (sha256:PCR10 selected) 
+        //For more information go to: 
+        //https://trustedcomputinggroup.org/wp-content/uploads/TCG_TPM2_r1p59_Part2_Structures_pub.pdf
+        //section: "10.6.1 TPMS_PCR_SELECT"
+    	byte[] PCR10selected =  hexStringToByteArray("00000001000b03000400");
+        //digest of PCR selected' Values
+        byte[] pcr_digest = digest.digest(PCR10);
+    	
+
+    	
+    	//Last policy + policyPCR_name + PCR10selected + pcr_digest
+    	byte[] Policy_contruction =new byte[this.Last_policy.length + policyPCR_name.length + PCR10selected.length + pcr_digest.length ];
+        System.arraycopy(this.Last_policy , 0, Policy_contruction,                  0, this.Last_policy.length);
+        System.arraycopy(policyPCR_name, 0, Policy_contruction, this.Last_policy.length, policyPCR_name.length); 
+        System.arraycopy(PCR10selected       , 0, Policy_contruction, this.Last_policy.length + policyPCR_name.length, PCR10selected.length);
+        System.arraycopy(pcr_digest       , 0, Policy_contruction, this.Last_policy.length + policyPCR_name.length + PCR10selected.length, pcr_digest.length);
+        System.out.println("PolicyPCR: \n" + byteArrayToHexString(Policy_contruction) );
+        this.Last_policy = digest.digest(Policy_contruction);
+        System.out.println("PolicyPCR: \n" + byteArrayToHexString(this.Last_policy) );
+    	return this.Last_policy;
+    }
+
     /***************************************************************
      * Private methods
      **************************************************************/
