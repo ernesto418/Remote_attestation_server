@@ -119,9 +119,7 @@ public class TPM_policies {
         System.arraycopy(policyPCR_name, 0, Policy_contruction, this.Last_policy.length, policyPCR_name.length); 
         System.arraycopy(PCR10selected       , 0, Policy_contruction, this.Last_policy.length + policyPCR_name.length, PCR10selected.length);
         System.arraycopy(pcr_digest       , 0, Policy_contruction, this.Last_policy.length + policyPCR_name.length + PCR10selected.length, pcr_digest.length);
-        System.out.println("PolicyPCR: \n" + byteArrayToHexString(Policy_contruction) );
         this.Last_policy = digest.digest(Policy_contruction);
-        System.out.println("PolicyPCR: \n" + byteArrayToHexString(this.Last_policy) );
     	return this.Last_policy;
     }
 

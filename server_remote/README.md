@@ -32,11 +32,11 @@ $ sudo java -jar server-0.0.1-SNAPSHOT.jar
 ## Step 1: Build the image
 
 ```
-  docker build -t server_remote_attestation_img:v0 .
+  docker build -t server_remote_attestation_img:v2 .
 ```
 ## Step 2: Create the container  
 ```
- docker create --name server_remote_attestation -p 3000:3000 -p 443:443 server_remote_attestation_img:v0
+ docker create --name server_remote_attestation -p 3000:3000 -p 443:443 server_remote_attestation_img:v2
 ```
 ## Step 3: Start the docker container
 

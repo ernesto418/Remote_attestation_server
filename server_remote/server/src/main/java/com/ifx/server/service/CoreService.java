@@ -756,9 +756,7 @@ public class CoreService {
                     }
                     TPM_policies TPM_policies = new TPM_policies();
                     TPM_policies.Policypcr_creation(Hex.decode(computedPcrSha256));
-                    System.out.println("Policy PCR: \n" + Hex.toHexString(TPM_policies.Last_policy));
                     TPM_policies.Policyreset_creation(resetCount);
-                    System.out.println("Policy Reset: \n" + Hex.toHexString(TPM_policies.Last_policy));
                     String authorization_signature = RSAk.sign_byte(TPM_policies.Last_policy);
                 try {
                     resp.setOutcome("Passed");
