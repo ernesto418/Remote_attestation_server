@@ -1,8 +1,7 @@
 FROM ubuntu:18.04
-COPY server server
-COPY pom.xml pom.xml
-RUN apt-get update && apt-get install -y maven default-jdk sudo
-RUN mvn install
+COPY server/target target
+
+RUN apt-get update && apt-get install -y  default-jdk
 
 CMD cd /
-CMD cd server/target && sudo java -jar server-0.0.1-SNAPSHOT.jar
+CMD cd target &&  java -jar server-0.0.1-SNAPSHOT.jar
