@@ -692,7 +692,7 @@ public class CoreService {
             //     return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
             // }
 
-            // AttestResp resp = new AttestResp(attest.getQuote(), attest.getSignature(),
+            //AttestResp resp = new AttestResp(attest.getQuote(), attest.getSignature(),
             //         Instant.now().toEpochMilli(), tpm.quote.quoted.clockInfo.clock,
             //         tpm.quote.quoted.firmwareVersion, null, null,
             //         sha1Bank, sha256Bank, pcrs, Hex.toHexString(tpm.quote.quoted.extraData),
@@ -739,11 +739,12 @@ public class CoreService {
              * Respond to REST service
              */
             //if (tpm.attest() != true) {
-            if (false) { //"if variable"
+            Boolean attest_= true;
+            if (attest_!=true) { //"if variable"
                 try {
-                    resp.setOutcome("Error in signature, platform measurement, or qualification data");
-                    simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
-                            new Response<AttestResp>(Response.STATUS_ERROR, resp));
+                    //resp.setOutcome("Error in signature, platform measurement, or qualification data");
+                   // simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
+                     //       new Response<AttestResp>(Response.STATUS_ERROR, "resp"));
                 } catch (Exception e) {
                     // ignore
                 }
@@ -767,9 +768,9 @@ public class CoreService {
                     // String authorization_signature = RSAk.sign_byte(TPM_policies.Last_policy); 
 
                 try {
-                    resp.setOutcome("Passed");
-                    simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
-                            new Response<AttestResp>(Response.STATUS_OK, resp));
+                    //resp.setOutcome("Passed");
+                    //simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
+                    //new Response<AttestResp>(Response.STATUS_OK, "resp"));
                 } catch (Exception e) {
                     // ignore
                 }
