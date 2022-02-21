@@ -644,92 +644,92 @@ public class CoreService {
 
     public Response<String> restAttest(@RequestBody Attest attest) {
         try {
-            User user = userRepository.findByUsername(attest.getUsername());
-            //if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
-            if (user == null) {//Modification, we dont want the necessity of use the password to validate the RB-pi status
-                return new Response<String>(Response.STATUS_ERROR, "invalid username");
-            }
-            int[] sha1Bank = fromStr2IntArray(user.getSha1Bank());
-            int[] sha256Bank = fromStr2IntArray(user.getSha256Bank());
-            String[] pcrs = fromStr2StrArray(user.getPcrs());
+            // User user = userRepository.findByUsername(attest.getUsername());
+            // //if (user == null || !passwordEncoder.matches(atelic.getPassword(),user.getPassword())) {
+            // if (user == null) {//Modification, we dont want the necessity of use the password to validate the RB-pi status
+            //     return new Response<String>(Response.STATUS_ERROR, "invalid username");
+            // }
+            // int[] sha1Bank = fromStr2IntArray(user.getSha1Bank());
+            // int[] sha256Bank = fromStr2IntArray(user.getSha256Bank());
+            // String[] pcrs = fromStr2StrArray(user.getPcrs());
 
-            /**
-             *  PCR10 is computed using the IMA template.
-             *  Here we take the attest.template as ordering reference.
-             *  Now arrange the order of attune.template to match with the reference
-             *  Compute the SHA1 & SHA256 digest of the re-ordered template
-             *  Use the computed digests as good reference and check it against the quote
-             */
-            List<IMATemplate> toOrder = TPMEngine.parseLinuxMeasurements(user.getMeasureTemplate(), 10);
-            List<IMATemplate> orderRef = TPMEngine.parseLinuxMeasurements(attest.getImaTemplate(), 10);
-            List<IMATemplate> ordered = orderIMATemplate(toOrder, orderRef);
-            String computedPcrSha1 = Hex.toHexString(TPMEngine.computePcrSha1(ordered));
-            String computedPcrSha256 = Hex.toHexString(TPMEngine.computePcrSha256(ordered));
-            String measureList = TPMEngine.printIMATemplate(orderRef);
-            for (int i = 0; i < sha1Bank.length; i++) {
-                if (sha1Bank[i] == TPMEngine.PLATFORM_PCR) {
-                    pcrs[i] = computedPcrSha1;
-                }
-            }
-            for (int i = 0; i < sha256Bank.length; i++) {
-                if (sha256Bank[i] == TPMEngine.PLATFORM_PCR) {
-                    pcrs[sha1Bank.length + i] = computedPcrSha256;
-                }
-            }
+            // /**
+            //  *  PCR10 is computed using the IMA template.
+            //  *  Here we take the attest.template as ordering reference.
+            //  *  Now arrange the order of attune.template to match with the reference
+            //  *  Compute the SHA1 & SHA256 digest of the re-ordered template
+            //  *  Use the computed digests as good reference and check it against the quote
+            //  */
+            // List<IMATemplate> toOrder = TPMEngine.parseLinuxMeasurements(user.getMeasureTemplate(), 10);
+            // List<IMATemplate> orderRef = TPMEngine.parseLinuxMeasurements(attest.getImaTemplate(), 10);
+            // List<IMATemplate> ordered = orderIMATemplate(toOrder, orderRef);
+            // String computedPcrSha1 = Hex.toHexString(TPMEngine.computePcrSha1(ordered));
+            // String computedPcrSha256 = Hex.toHexString(TPMEngine.computePcrSha256(ordered));
+            // String measureList = TPMEngine.printIMATemplate(orderRef);
+            // for (int i = 0; i < sha1Bank.length; i++) {
+            //     if (sha1Bank[i] == TPMEngine.PLATFORM_PCR) {
+            //         pcrs[i] = computedPcrSha1;
+            //     }
+            // }
+            // for (int i = 0; i < sha256Bank.length; i++) {
+            //     if (sha256Bank[i] == TPMEngine.PLATFORM_PCR) {
+            //         pcrs[sha1Bank.length + i] = computedPcrSha256;
+            //     }
+            // }
 
-            TPMEngine tpm = new TPMEngine();
-            if (tpm.import_publickey(user.getAkPub()) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad public key");
-            }
-            if (tpm.import_pcr(sha1Bank, sha256Bank, pcrs) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad pcr values format");
-            }
+            // TPMEngine tpm = new TPMEngine();
+            // if (tpm.import_publickey(user.getAkPub()) != true) {
+            //     return new Response<String>(Response.STATUS_ERROR, "bad public key");
+            // }
+            // if (tpm.import_pcr(sha1Bank, sha256Bank, pcrs) != true) {
+            //     return new Response<String>(Response.STATUS_ERROR, "bad pcr values format");
+            // }
             
-            if (tpm.import_qualification(user.getQualification()) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad qualification format or qualification deleted");
-            }// we can not nullify the qualification here because in our scheme, almost anybody can send a request and arrive here
-            if (tpm.import_quote_signature(attest.getQuote(), attest.getSignature()) != true) {
-                return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
-            }
+            // if (tpm.import_qualification(user.getQualification()) != true) {
+            //     return new Response<String>(Response.STATUS_ERROR, "bad qualification format or qualification deleted");
+            // }// we can not nullify the qualification here because in our scheme, almost anybody can send a request and arrive here
+            // if (tpm.import_quote_signature(attest.getQuote(), attest.getSignature()) != true) {
+            //     return new Response<String>(Response.STATUS_ERROR, "bad quote or signature format");
+            // }
 
-            AttestResp resp = new AttestResp(attest.getQuote(), attest.getSignature(),
-                    Instant.now().toEpochMilli(), tpm.quote.quoted.clockInfo.clock,
-                    tpm.quote.quoted.firmwareVersion, null, null,
-                    sha1Bank, sha256Bank, pcrs, Hex.toHexString(tpm.quote.quoted.extraData),
-                    Hex.toHexString(((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrDigest),
-                    Hex.toHexString(tpm.computeExpectedPcrsDigest()),
-                    Hex.toHexString(tpm.quote.quoted.qualifiedSigner), measureList, null);
+            // AttestResp resp = new AttestResp(attest.getQuote(), attest.getSignature(),
+            //         Instant.now().toEpochMilli(), tpm.quote.quoted.clockInfo.clock,
+            //         tpm.quote.quoted.firmwareVersion, null, null,
+            //         sha1Bank, sha256Bank, pcrs, Hex.toHexString(tpm.quote.quoted.extraData),
+            //         Hex.toHexString(((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrDigest),
+            //         Hex.toHexString(tpm.computeExpectedPcrsDigest()),
+            //         Hex.toHexString(tpm.quote.quoted.qualifiedSigner), measureList, null);
 
-            for (int i = 0; i < ((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect.length; i++) {
-                if (((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].hash == TPM_ALG_ID.SHA1) {
-                    int[] pcrSelect = tpm.pcrBitMap(((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].pcrSelect);
-                    resp.setSha1Bank(pcrSelect);
-                } else if (((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].hash == TPM_ALG_ID.SHA256) {
-                    int[] pcrSelect = tpm.pcrBitMap(((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].pcrSelect);
-                    resp.setSha256Bank(pcrSelect);
-                }
-            }
+            // for (int i = 0; i < ((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect.length; i++) {
+            //     if (((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].hash == TPM_ALG_ID.SHA1) {
+            //         int[] pcrSelect = tpm.pcrBitMap(((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].pcrSelect);
+            //         resp.setSha1Bank(pcrSelect);
+            //     } else if (((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].hash == TPM_ALG_ID.SHA256) {
+            //         int[] pcrSelect = tpm.pcrBitMap(((TPMS_QUOTE_INFO)tpm.quote.quoted.attested).pcrSelect[i].pcrSelect);
+            //         resp.setSha256Bank(pcrSelect);
+            //     }
+            // }
 
-            /**a
-             * Check signature
-             * It is important to know if the fail was becasue the signature or the quote to delete the qualification when the signature is verifyied
-             * ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature
-             */
-            if (tpm.verify_signature(tpm.quote.quoted.toTpm(),  tpm.quote.signature) != true) {
-                try {
-                    resp.setOutcome("Error in signature");
-                    simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
-                            new Response<AttestResp>(Response.STATUS_ERROR, resp));
-                } catch (Exception e) {
-                    // ignore
-                }
-                return new Response<String>(Response.STATUS_ERROR, "Error in signature");
-            }
+            // /**a
+            //  * Check signature
+            //  * It is important to know if the fail was becasue the signature or the quote to delete the qualification when the signature is verifyied
+            //  * ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature
+            //  */
+            // if (tpm.verify_signature(tpm.quote.quoted.toTpm(),  tpm.quote.signature) != true) {
+            //     try {
+            //         resp.setOutcome("Error in signature");
+            //         simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
+            //                 new Response<AttestResp>(Response.STATUS_ERROR, resp));
+            //     } catch (Exception e) {
+            //         // ignore
+            //     }
+            //     return new Response<String>(Response.STATUS_ERROR, "Error in signature");
+            // }
             
-            //If the signature was OK, it is a genuine attestation, therefore we can delete the qualification to avoid futures replay attacks
-            //If the signature is OK, there is just one try to pass the attestation process
-            user.setQualification(null);
-            userRepository.save(user);
+            // //If the signature was OK, it is a genuine attestation, therefore we can delete the qualification to avoid futures replay attacks
+            // //If the signature is OK, there is just one try to pass the attestation process
+            // user.setQualification(null);
+            // userRepository.save(user);
 
             /**
              * Execute attestation, check quote and signature
@@ -738,7 +738,8 @@ public class CoreService {
              * &
              * Respond to REST service
              */
-            if (tpm.attest() != true) {
+            //if (tpm.attest() != true) {
+            if (false) { //"if variable"
                 try {
                     resp.setOutcome("Error in signature, platform measurement, or qualification data");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
@@ -746,24 +747,39 @@ public class CoreService {
                 } catch (Exception e) {
                     // ignore
                 }
+                //hello Jose, with "if variable"=true, the server will always enter here, 
+                try {
+                    //send information to security infusion, attestation failed
+                } catch (Exception e) {
+                    System.out.print("Remote attestation not passed and communication with security infusion agent failed \n ERROR: \n" + e);
+                }
                 return new Response<String>(Response.STATUS_ERROR, "Error in signature, platform measurement, or qualification data");
             } else {
-                    RSAkey RSAk = new RSAkey();
-                    RSAk.import_pair(user.getPiV_PEM(),user.getPuB_PEM());
-                    int resetCount = tpm.getResetcount();
-                    if (resetCount == -1){
-                        return new Response<String>(Response.STATUS_ERROR, "Invalid resetCount in quote (normally is becasue the quote has a bad format)");
-                    }
-                    TPM_policies TPM_policies = new TPM_policies();
-                    TPM_policies.Policypcr_creation(Hex.decode(computedPcrSha256));
-                    TPM_policies.Policyreset_creation(resetCount);
-                    String authorization_signature = RSAk.sign_byte(TPM_policies.Last_policy);
+                    // RSAkey RSAk = new RSAkey();
+                    // RSAk.import_pair(user.getPiV_PEM(),user.getPuB_PEM());
+                    // int resetCount = tpm.getResetcount();
+                    // if (resetCount == -1){
+                    //     return new Response<String>(Response.STATUS_ERROR, "Invalid resetCount in quote (normally is becasue the quote has a bad format)");
+                    // }
+                    // TPM_policies TPM_policies = new TPM_policies();
+                    // TPM_policies.Policypcr_creation(Hex.decode(computedPcrSha256));
+                    // TPM_policies.Policyreset_creation(resetCount);
+                    // String authorization_signature = RSAk.sign_byte(TPM_policies.Last_policy); 
+
                 try {
                     resp.setOutcome("Passed");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
                             new Response<AttestResp>(Response.STATUS_OK, resp));
                 } catch (Exception e) {
                     // ignore
+                }
+                
+                String authorization_signature = "It is a debug version, not authorization_signature";
+                //hello Jose, with "if variable"=false, the server will always enter here, 
+                try {
+                    //send information to security infusion, everything was right
+                } catch (Exception e) {
+                    System.out.print("Remote attestation passed but communication with security infusion agent failed \n ERROR: \n" + e);
                 }
                 return new Response<String>(Response.STATUS_OK, "Passed",authorization_signature);
             }
