@@ -36,6 +36,8 @@ import com.ifx.server.tss.RSAkey;
 import com.ifx.server.tss.TPM_policies;
 import com.ifx.server.tss.AESengine;
 import com.ifx.server.tss.UnsCSR;
+import com.ifx.server.controller.SecurityInfusion;
+
 import org.bouncycastle.util.encoders.Hex;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -740,6 +742,8 @@ public class CoreService {
              */
             //if (tpm.attest() != true) {
             Boolean attest_= true;
+            String id_ = "raspberryPi1";
+            String v_id_ = "1.1";
             if (attest_!=true) { //"if variable"
                 try {
                     //resp.setOutcome("Error in signature, platform measurement, or qualification data");
@@ -748,8 +752,9 @@ public class CoreService {
                 } catch (Exception e) {
                     // ignore
                 }
-                //hello Jose, with "if variable"=true, the server will always enter here, 
+                //hello Jose, with "if variable"=true, the server will always enter here,  
                 try {
+                    SecurityInfusion.sendData(attest_,id_,v_id_);
                     //send information to security infusion, attestation failed
                 } catch (Exception e) {
                     System.out.print("Remote attestation not passed and communication with security infusion agent failed \n ERROR: \n" + e);
@@ -778,6 +783,7 @@ public class CoreService {
                 String authorization_signature = "It is a debug version, not authorization_signature";
                 //hello Jose, with "if variable"=false, the server will always enter here, 
                 try {
+                    SecurityInfusion.sendData(attest_,id_,v_id_);
                     //send information to security infusion, everything was right
                 } catch (Exception e) {
                     System.out.print("Remote attestation passed but communication with security infusion agent failed \n ERROR: \n" + e);
