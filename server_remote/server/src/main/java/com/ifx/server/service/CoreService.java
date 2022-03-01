@@ -752,9 +752,14 @@ public class CoreService {
                 } catch (Exception e) {
                     // ignore
                 }
-                //hello Jose, with "if variable"=true, the server will always enter here,  
+                 
                 try {
-                    SecurityInfusion.sendData(attest_,id_,v_id_);
+                    new Thread(new Runnable() {
+                        public void run() {
+                            SecurityInfusion.sendData(attest_,id_,v_id_);  //Send data to kafka topic
+                        }
+                    }).start(); 
+                    
                     //send information to security infusion, attestation failed
                 } catch (Exception e) {
                     System.out.print("Remote attestation not passed and communication with security infusion agent failed \n ERROR: \n" + e);
@@ -781,10 +786,15 @@ public class CoreService {
                 }
                 
                 String authorization_signature = "It is a debug version, not authorization_signature";
-                //hello Jose, with "if variable"=false, the server will always enter here, 
+                
                 try {
-                    SecurityInfusion.sendData(attest_,id_,v_id_);
                     //send information to security infusion, everything was right
+                    new Thread(new Runnable() {
+                        public void run() {
+                            SecurityInfusion.sendData(attest_,id_,v_id_); //Send data to kafka topic
+                        }
+                    }).start(); 
+                    
                 } catch (Exception e) {
                     System.out.print("Remote attestation passed but communication with security infusion agent failed \n ERROR: \n" + e);
                 }
