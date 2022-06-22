@@ -238,12 +238,16 @@ public class TPMEngine {
             return false;
         }
     }
-    public boolean verify_signature(byte[] message, TPMU_SIGNATURE signature) {
+    public boolean verify_signatureQuote(TPMU_SIGNATURE signature) {
         try {
             /**
                 * Verify signature with loaded AK
                 */
-            return  Crypto.validateSignature(trustedPK,  message,  signature);
+
+            if (!arraysAreEqual(quote.quoted.extraData, qualification))
+                return false;
+
+            return  Crypto.validateSignature(trustedPK,  quote.quoted.toTpm(),  signature);
         } catch (Exception e) {
             return false;
         }
@@ -716,5 +720,17 @@ public class TPMEngine {
      */
     private static String byteArrayToHexString(byte[] ba) {
         return Hex.toHexString(ba);
+    }
+
+    private static boolean arraysAreEqual(byte[] a, byte[] b)
+    {
+        if (a.length != b.length)
+            return false;
+        for (int j=0; j < a.length; j++)
+        {
+            if ( a[j] != b[j])
+                return false;
+        }
+        return true;
     }
 }

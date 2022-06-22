@@ -715,7 +715,7 @@ public class CoreService {
              * It is important to know if the fail was becasue the signature or the quote to delete the qualification when the signature is verifyied
              * ATTEST already verifies the signature, but we neet to make the server able to identify if the error is in the attestation or in the signature
              */
-            if (tpm.verify_signature(tpm.quote.quoted.toTpm(),  tpm.quote.signature) != true) {
+            if (tpm.verify_signatureQuote(tpm.quote.signature) != true) {
                 try {
                     resp.setOutcome("Error in signature");
                     simpMessagingTemplate.convertAndSendToUser(attest.getUsername(), "/topic/private-test",
